@@ -3,10 +3,19 @@ from sqlalchemy.orm import sessionmaker
 
 from models.base import Base
 
-class Database():
-    """A class represent of the Epic Event database
-    """
-    def __init__(self, db_user:str, db_password:str, db_host:str, db_port:str, db_name:str, db_schema:str):
+
+class Database:
+    """A class represent of the Epic Event database"""
+
+    def __init__(
+        self,
+        db_user: str,
+        db_password: str,
+        db_host: str,
+        db_port: str,
+        db_name: str,
+        db_schema: str,
+    ):
         """Constructor of the database Class
 
         Arguments:
@@ -23,10 +32,11 @@ class Database():
         self.port = db_port
         self.name = db_name
         self.schema = db_schema
-        self.url = f'postgresql+psycopg2://{self.user}:{self.password}@{self.host}:{self.port}/{self.name}'
-        self.engine = create_engine(self.url, connect_args={'options': f'-csearch_path={self.schema}'})
-        self.session = sessionmaker(bind=self.engine) 
-
+        self.url = f"postgresql+psycopg2://{self.user}:{self.password}@{self.host}:{self.port}/{self.name}"
+        self.engine = create_engine(
+            self.url, connect_args={"options": f"-csearch_path={self.schema}"}
+        )
+        self.session = sessionmaker(bind=self.engine)
 
     def connexion(self) -> bool:
         """Method to connect to database
@@ -41,7 +51,7 @@ class Database():
         except Exception as ex:
             print("La connexion à la base de donnée a échouée.")
             return None
-        
+
     def deconnexion(self) -> bool:
         """Method to deconnect from the database
 
@@ -63,9 +73,9 @@ class Database():
     def drop_all_tables(self):
         Base.metadata.drop_all(self.engine)
         print("Les tables ont bien été supprimées")
-        
+
     def get_session(self):
         return self.session
-    
+
     def __repr__(self) -> str:
         return self.name

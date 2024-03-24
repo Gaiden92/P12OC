@@ -15,4 +15,4 @@ class Company(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name_company = Column(String, unique=True)
-    client = relationship('Client', back_populates='company')
+    client = relationship("Client", back_populates="company")

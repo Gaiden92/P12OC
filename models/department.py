@@ -16,4 +16,7 @@ class Department(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name_department = Column(String, unique=True)
 
-    collaborators = relationship("Collaborator", back_populates='department')
+    collaborators = relationship("Collaborator", back_populates="department")
+
+    def __str__(self):
+        return self.name_department

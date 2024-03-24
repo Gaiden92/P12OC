@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, Date, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 from .base import Base
+from models.company import Company
 
 
 class Client(Base):
@@ -20,9 +21,8 @@ class Client(Base):
     creation_date = Column(Date)
     update_date = Column(Date)
 
-    compagny_id = Column(Integer, ForeignKey("companies.id"))
+    company_id = Column(Integer, ForeignKey("companies.id"))
     company = relationship("Company", back_populates="client")
-    
 
-    contract = relationship('Contract', back_populates='client')
-
+    commercial_id = Column(Integer, ForeignKey("collaborators.id"))
+    contract = relationship("Contract", back_populates="client")

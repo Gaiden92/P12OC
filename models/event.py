@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Date, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, DATETIME
 from sqlalchemy.orm import relationship
 
 from .base import Base
@@ -19,11 +19,10 @@ class Event(Base):
     contract_id = Column(Integer, ForeignKey("contracts.id"))
     contract = relationship("Contract", back_populates="event")
 
-    collaborator_id = Column(Integer, ForeignKey("collaborators.id"))
-    collaborators = relationship("Collaborator", back_populates="events")
+    support_id = Column(Integer, ForeignKey("collaborators.id"))
 
     location = Column(String)
     participants = Column(Integer)
     notes = Column(String)
-    start_date = Column(Date)
-    end_date = Column(Date)
+    start_date = Column(DATETIME)
+    end_date = Column(DATETIME)
