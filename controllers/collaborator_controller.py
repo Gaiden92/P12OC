@@ -72,9 +72,9 @@ class CollaboratorController:
         """
         collaborator = self.dao.update_name_collaborator_by_id(id, new_name)
         if collaborator:
-            return self.view.update_collaborator_name_success()
+            return self.view.update_collaborator_success()
         else:
-            return self.view.update_collaborator_name_failed()
+            return self.view.update_collaborator_failed()
 
     def check_login(self, id: int, password: str):
 
