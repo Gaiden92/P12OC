@@ -1,7 +1,8 @@
 from dao.department_dao import DepartmentDao
 from views.department_view import DepartmentView
 from .user_controller import UserController
-
+from models.permissions import Permission
+from models.user import User
 
 class DepartmentController:
     """A class representing the department controller"""

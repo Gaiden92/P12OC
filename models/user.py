@@ -23,7 +23,7 @@ class User:
         Returns:
             bool: the token user
         """
-        expiration_time = datetime.utcnow() + timedelta(minutes=5)
+        expiration_time = datetime.utcnow() + timedelta(minutes=15)
 
         payload = {"user_id": self.id, "rights": self.rights, "exp": expiration_time}
         return jwt.encode(payload, algorithm="HS256", key="maclesecrete")

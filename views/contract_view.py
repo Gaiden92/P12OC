@@ -72,3 +72,17 @@ class ContractView:
         tried to create a contract.
         """
         print("Le client n'a pas pu être supprimé.")
+
+    @staticmethod
+    def not_permission_contract() -> None:
+        """Method to display a message that the user
+        has not the permission to add or update a contract.
+        """
+        print("Vous n'avez pas les droits nécessaire pour ajouter ou modifier un contrat.")
+    
+    @staticmethod
+    def not_permission_commercial_contract() -> None:
+        """Method to display a message that the user
+        has not the permission to update the contract.
+        """
+        print("Vous n'êtes pas le commercial du contrat.")

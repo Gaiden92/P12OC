@@ -1,7 +1,7 @@
 import click
 
 from commands.user_commands import user_commands
-from commands.client_commands import client_commmands
+from commands.client_commands import client_commands
 from commands.collaborator_commands import collaborator_commands
 from commands.company_commands import company_commands
 from commands.contract_commands import contract_commands
@@ -14,7 +14,7 @@ def crm():
 
 
 crm.add_command(user_commands)
-crm.add_command(client_commmands)
+crm.add_command(client_commands)
 crm.add_command(collaborator_commands)
 crm.add_command(company_commands)
 crm.add_command(contract_commands)

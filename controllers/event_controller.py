@@ -1,6 +1,8 @@
 from dao.event_dao import EventDao
+from dao.contract_dao import ContractDao
 from views.event_view import EventView
-
+from models.permissions import Permission
+from models.user import User
 
 class EventController:
     """A class representing the event controller"""
@@ -14,6 +16,8 @@ class EventController:
         """
         self.dao = EventDao()
         self.view = EventView()
+        self.user = User.load_user()
+        self.permission = Permission(self.user)
 
     def create_event(
         self,
@@ -26,6 +30,10 @@ class EventController:
         start_date: str,
         end_date: str,
     ):
+        contract = ContractDao().select_contract_by_id(contract_id)
+
+        if not self.permission.isCommercialOfContract(contract):
+            return self.view.not_permission_commercial_contract()
 
         event = self.dao.create_event(
             name,
@@ -75,6 +83,9 @@ class EventController:
             id -- int: the event id
             new_name -- str: the event new name
         """
+        event = self.dao.select_event_by_id(id)
+        if not self.permission.isSupportOfEvent(event):
+            return self.view.not_permission_support_of_event()
         event = self.dao.update_name_event_by_id(id, new_name)
         if event:
             return self.view.update_event_success()
@@ -88,6 +99,7 @@ class EventController:
             id -- int: the event id
             new_location -- str: the event new location
         """
+
         event = self.dao.update_location_event_by_id(id, new_location)
         if event:
             return self.view.update_event_success()
@@ -101,6 +113,9 @@ class EventController:
             id -- int: the event id
             new_notes -- str: the event new notes
         """
+        event = self.dao.select_event_by_id(id)
+        if not self.permission.isSupportOfEvent(event):
+            return self.view.not_permission_support_of_event()
         event = self.dao.update_notes_event_by_id(id, new_notes)
         if event:
             return self.view.update_event_success()
@@ -114,6 +129,9 @@ class EventController:
             id -- int: the event id
             new_start_date -- str: the event new start date
         """
+        event = self.dao.select_event_by_id(id)
+        if not self.permission.isSupportOfEvent(event):
+            return self.view.not_permission_support_of_event()
         event = self.dao.update_start_date_event_by_id(id, new_start_date)
         if event:
             return self.view.update_event_success()
@@ -127,6 +145,9 @@ class EventController:
             id -- int: the event id
             new_end_date -- str: the event new end date
         """
+        event = self.dao.select_event_by_id(id)
+        if not self.permission.isSupportOfEvent(event):
+            return self.view.not_permission_support_of_event()
         event = self.dao.update_end_date_event_by_id(id, new_end_date)
         if event:
             return self.view.update_event_success()
@@ -140,6 +161,9 @@ class EventController:
             id -- int: the event id
             new_participants -- int: the event new participants
         """
+        event = self.dao.select_event_by_id(id)
+        if not self.permission.isSupportOfEvent(event):
+            return self.view.not_permission_support_of_event()
         event = self.dao.update_participants_event_by_id(id, new_participants)
         if event:
             return self.view.update_event_success()
@@ -153,6 +177,9 @@ class EventController:
             id -- int: the event id
             new_support_id -- int: the event new support id
         """
+        event = self.dao.select_event_by_id(id)
+        if not self.permission.isSupportOfEvent(event):
+            return self.view.not_permission_support_of_event()
         event = self.dao.update_support_id_event_by_id(id, new_support_id)
         if event:
             return self.view.update_event_success()

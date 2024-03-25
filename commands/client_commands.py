@@ -5,12 +5,12 @@ from controllers.client_controller import ClientController
 
 
 @click.group()
-def client_commmands():
+def client_commands():
     pass
 
 
 # Client commands
-@client_commmands.command()
+@client_commands.command()
 @click.option("--token", prompt="Enter your token", help="token user", type=str)
 @click.option(
     "--name", prompt="Enter the client name", help="name of the client", type=str
@@ -34,7 +34,7 @@ def add_client(token: str, name: str, contact: str, email: str, company_id: int)
         controller_client.create_client(name, contact, email, company_id)
 
 
-@client_commmands.command()
+@client_commands.command()
 @click.option("--token", prompt="Enter your token", help="token user", type=str)
 def select_all_clients(token: str):
     controller_user = UserController()
@@ -43,7 +43,7 @@ def select_all_clients(token: str):
         controller_client.get_all_clients()
 
 
-@client_commmands.command()
+@client_commands.command()
 @click.option("--token", prompt="Enter your token", help="token user", type=str)
 @click.option("--id", prompt="Enter the client id", help="the client id", type=int)
 def select_client_by_id(token: str, id: int):
@@ -53,7 +53,7 @@ def select_client_by_id(token: str, id: int):
         controller_client.get_client_by_id(id)
 
 
-@client_commmands.command()
+@client_commands.command()
 @click.option("--token", prompt="Enter your token", help="token user", type=str)
 @click.option("--id", prompt="Enter the client ID", help="ID of the client", type=int)
 @click.option(
@@ -69,7 +69,7 @@ def update_client_name_by_id(token: str, id: int, new_name: str):
         controller_client.update_client_name_by_id(id, new_name)
 
 
-@client_commmands.command()
+@client_commands.command()
 @click.option("--token", prompt="Enter your token", help="token user", type=str)
 @click.option("--id", prompt="Enter the client ID", help="ID of the client", type=int)
 @click.option(
@@ -85,7 +85,7 @@ def update_phone_client_by_id(token: str, id: int, new_phone: str):
         controller_client.update_phone_client_by_id(id, new_phone)
 
 
-@client_commmands.command()
+@client_commands.command()
 @click.option("--token", prompt="Enter your token", help="token user", type=str)
 @click.option("--id", prompt="Enter the client ID", help="ID of the client", type=int)
 @click.option(
@@ -101,7 +101,7 @@ def update_email_client_by_id(token: str, id: int, new_email: str):
         controller_client.update_email_client_by_id(id, new_email)
 
 
-@client_commmands.command()
+@client_commands.command()
 @click.option("--token", prompt="Enter your token", help="token user", type=str)
 @click.option("--id", prompt="Enter the client ID", help="ID of the client", type=int)
 @click.option(
@@ -117,7 +117,7 @@ def update_company_client_by_id(token: str, id: int, id_company: int):
         controller_client.update_company_client_by_id(id, id_company)
 
 
-@client_commmands.command()
+@client_commands.command()
 @click.option("--token", prompt="Enter your token", help="token user", type=str)
 @click.option("--id", prompt="Enter the client ID", help="ID of the client", type=int)
 @click.option(
@@ -131,3 +131,12 @@ def update_commercial_client_by_id(token: str, id: int, id_commercial: int):
     if controller_user.verify_token(token):
         controller_client = ClientController()
         controller_client.update_commercial_client_by_id(id, id_commercial)
+
+@client_commands.command()
+@click.option("--token", prompt="Enter your token", help="token user", type=str)
+@click.option("--id", prompt="Enter the client ID", help="ID of the client", type=int)
+def delete_client_by_id(token: str, id: int):
+    controller_user = UserController()
+    if controller_user.verify_token(token):
+        controller_client = ClientController()
+        controller_client.delete_client_by_id(id)

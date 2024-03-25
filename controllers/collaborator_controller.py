@@ -1,6 +1,6 @@
 from dao.collaborator_dao import CollaboratorDao
 from views.collaborator_view import CollaboratorView
-
+from models.permissions import Permission
 from models.user import User
 
 
@@ -16,6 +16,8 @@ class CollaboratorController:
         """
         self.dao = CollaboratorDao()
         self.view = CollaboratorView()
+        self.user = User.load_user()
+        self.permission = Permission(self.user)
 
     def create_collaborator(
         self, name: str, contact: str, password: str, department_id: int
@@ -28,7 +30,8 @@ class CollaboratorController:
             password -- str: password collaborator
             department_id -- int: departmend_id
         """
-
+        if not self.permission.isGestionDepartment():
+            return self.view.not_permission_collaborator()
         if self.dao.create_collaborator(name, contact, password, department_id):
             self.view.create_collaborator_success()
         else:
@@ -53,7 +56,6 @@ class CollaboratorController:
         Returns:
             list: list of collaborators
         """
-
         collaborators = self.dao.select_all_collaborators()
         if collaborators:
             return self.view.display_all_collaborators(collaborators)
@@ -61,6 +63,7 @@ class CollaboratorController:
             return self.view.none_collaborators()
 
     def update_collaborator_name_by_id(self, id: int, new_name: str) -> any:
+
         """Method to update a collaborator by his id
 
         Arguments:
@@ -70,6 +73,8 @@ class CollaboratorController:
         Returns:
             view
         """
+        if not self.permission.isGestionDepartment():
+            return self.view.not_permission_collaborator()
         collaborator = self.dao.update_name_collaborator_by_id(id, new_name)
         if collaborator:
             return self.view.update_collaborator_success()
@@ -77,7 +82,6 @@ class CollaboratorController:
             return self.view.update_collaborator_failed()
 
     def check_login(self, id: int, password: str):
-
         collaborator = self.dao.select_collaborator_by_id(id)
         if collaborator.check_password(password):
             current_user = User(id, collaborator.department_id)
@@ -91,6 +95,8 @@ class CollaboratorController:
         return self.dao.create_collaborator(name, contact, password, department_id)
 
     def delete_collaborator_by_id(self, id_collaborator: int) -> any:
+        if not self.permission.isGestionDepartment():
+            return self.view.not_permission_collaborator()
         collaborator = self.dao.delete_collaborator_by_id(id_collaborator)
         if collaborator:
             return self.view.delete_collaborator_success()

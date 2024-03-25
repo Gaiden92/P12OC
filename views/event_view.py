@@ -58,3 +58,10 @@ class EventView:
         tried to update an event.
         """
         print("L'evenement n'a pas pu être mis à jour.")
+
+    @staticmethod
+    def not_permission_commercial_contract() -> None:
+        """Method to display a message that the user
+        has not the permission to update the contract.
+        """
+        print("Vous n'êtes pas le commercial du contrat.")

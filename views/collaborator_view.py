@@ -1,3 +1,6 @@
+import tableprint as tp
+
+
 class CollaboratorView:
     """A class representing the view for a class Collaborator"""
 
@@ -30,7 +33,18 @@ class CollaboratorView:
         Arguments:
             collaborators -- list: collaborators
         """
-        print(collaborators)
+        headers = ['id', 'name', 'contact', 'department']
+        print(tp.header(headers, 20))
+        for collaborator in collaborators:
+            print(tp.row(
+                [
+                    collaborator.id,
+                    collaborator.name_collaborator,
+                    collaborator.department.name_department
+                ],
+                width=20)
+                )
+        print(tp.bottom(4, width=20))
 
     def display_collaborator(self, collaborator: object) -> None:
         """Method to display a collaborator
@@ -38,7 +52,19 @@ class CollaboratorView:
         Arguments:
             collaborator -- object: collaborator
         """
-        print(collaborator)
+        headers = ['id', 'name', 'contact', 'department']
+        print(tp.header(headers, 20))
+
+        print(tp.row(
+                [
+                    collaborator.id,
+                    collaborator.name_collaborator,
+                    collaborator.contact,
+                    collaborator.department.name_department
+                ],
+                width=20)
+                )
+        print(tp.bottom(4, width=20))
 
     def update_collaborator_success(self) -> None:
         """Method to display message success of collaborator update

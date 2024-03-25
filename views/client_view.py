@@ -58,3 +58,17 @@ class ClientView:
         actually in database.
         """
         print("Aucuns client en base de donnée.")
+
+    @staticmethod
+    def not_permission_client() -> None:
+        """Method to display a message that the user
+        has not the permission to add or update a client.
+        """
+        print("Vous n'avez pas les droits nécessaires pour ajouter ou modifier un client")
+
+    @staticmethod
+    def not_permission_commercial_client():
+        """Method to display a message that the user
+        has not the permission to add or update a client.
+        """
+        print("Vous n'êtes pas le commercial du client")     

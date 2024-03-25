@@ -1,6 +1,7 @@
 from dao.company_dao import CompanyDao
 from views.company_view import CompanyView
-
+from models.permissions import Permission
+from models.user import User
 
 class CompanyController:
     """A class representing the company controller"""

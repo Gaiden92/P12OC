@@ -1,6 +1,7 @@
 from dao.contract_dao import ContractDao
 from views.contract_view import ContractView
-
+from models.permissions import Permission
+from models.user import User
 
 class ContractController:
     """A class representing the contract controller"""
@@ -14,10 +15,14 @@ class ContractController:
         """
         self.dao = ContractDao()
         self.view = ContractView()
+        self.user = User.load_user()
+        self.permission = Permission(self.user)
 
     def create_contract(
         self, client_id: int, total_amount: float, remaining_amount: float
     ):
+        if not self.permission.isGestionDepartment():
+            return self.view.not_permission_contract()
         total_amount_int = total_amount * 100
         remaining_amount_int = remaining_amount * 100
         contract = self.dao.create_contract(
@@ -76,6 +81,9 @@ class ContractController:
             return self.view.none_contracts()
 
     def update_remaining_amount_by_id(self, id: int, new_remaining_amount: float):
+        contract = self.dao.select_contract_by_id(id)
+        if not self.permission.isCommercialOfContract(contract):
+            return self.view.not_permission_commercial_contract()
         new_remaining_amount_int = new_remaining_amount * 100
         contract = self.dao.update_remaining_amount_by_id(id, new_remaining_amount_int)
         if contract:
@@ -84,6 +92,9 @@ class ContractController:
             self.view.update_failed()
 
     def update_total_amount_by_id(self, id: int, new_total_amount: float):
+        contract = self.dao.select_contract_by_id(id)
+        if not self.permission.isCommercialOfContract(contract):
+            return self.view.not_permission_commercial_contract()
         new_total_amount_int = new_total_amount * 100
         contract = self.dao.update_total_amount_by_id(id, new_total_amount_int)
         if contract:
@@ -92,6 +103,9 @@ class ContractController:
             self.view.update_failed()
 
     def update_status_by_id(self, id: int, status: str):
+        contract = self.dao.select_contract_by_id(id)
+        if not self.permission.isCommercialOfContract(contract):
+            return self.view.not_permission_commercial_contract()
         match status:
             case "open":
                 status = True
@@ -104,6 +118,9 @@ class ContractController:
             self.view.update_failed()
 
     def update_client_contract_by_id(self, id: int, id_client: int):
+        contract = self.dao.select_contract_by_id(id)
+        if not self.permission.isCommercialOfContract(contract):
+            return self.view.not_permission_commercial_contract()
         contract = self.dao.update_client_contract_by_id(id, id_client)
         if contract:
             self.view.update_success()
