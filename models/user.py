@@ -1,7 +1,7 @@
-import json, os, jwt
+import json, jwt
 from datetime import datetime, timedelta
 
-from config.parameters import TOKEN_PATH
+from config.parameters import TOKEN_PATH, DELAY
 
 
 class User:
@@ -23,7 +23,7 @@ class User:
         Returns:
             bool: the token user
         """
-        expiration_time = datetime.utcnow() + timedelta(minutes=15)
+        expiration_time = datetime.utcnow() + timedelta(minutes=DELAY)
 
         payload = {"user_id": self.id, "rights": self.rights, "exp": expiration_time}
         return jwt.encode(payload, algorithm="HS256", key="maclesecrete")

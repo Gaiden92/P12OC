@@ -43,15 +43,15 @@ class ContractDao:
     def create_contract(
         self,
         client_id: int,
-        total_amount: int,
-        remaining_amount: int,
+        total_amount: float,
+        remaining_amount: float,
     ) -> bool:
         """Method to insert new contract in database.
 
         Arguments:
             client_id -- int: the id of the client.
-            total_amount -- int: the contract total amount
-            remaining_amount -- int: the contract remaining amount
+            total_amount -- float: the contract total amount
+            remaining_amount -- float: the contract remaining amount
         Returns:
             bool
         """
@@ -69,13 +69,13 @@ class ContractDao:
         return True
 
     def update_remaining_amount_by_id(
-        self, id_contract: int, new_remaining_amount: int
+        self, id_contract: int, new_remaining_amount: float
     ) -> bool:
         """Method to update a contract remaining amount by his id.
 
         Arguments:
             id_contract -- int: the contract id to update
-            new_remaining_amount -- int: the new remaining amount of the contract
+            new_remaining_amount -- float: the new remaining amount of the contract
 
         Returns:
             bool
@@ -89,13 +89,13 @@ class ContractDao:
             return False
 
     def update_total_amount_by_id(
-        self, id_contract: int, new_total_amount: int
+        self, id_contract: int, new_total_amount: float
     ) -> bool:
         """Method to update a contract total amount by his id.
 
         Arguments:
             id_contract -- int: the contract id to update
-            new_total_amount -- int: the new total amount of the contract
+            new_total_amount -- float: the new total amount of the contract
 
         Returns:
             bool

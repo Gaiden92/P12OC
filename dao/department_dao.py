@@ -107,9 +107,8 @@ class DepartmentDao:
             bool
         """
         department_to_delete = self.query.filter(Department.id == id_department)
-        if department_to_delete:
+        if department_to_delete.delete():
             try:
-                department_to_delete.delete()
                 self.session.commit()
                 return True
             except IntegrityError:

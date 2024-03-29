@@ -188,9 +188,8 @@ class ClientDao:
 
     def delete_client_by_id(self, id_client: int) -> bool:
         client = self.query.filter(Client.id == id_client)
-        if client:
+        if client.delete():
             try:
-                client.delete()
                 self.session.commit()
                 return True
             except IntegrityError:

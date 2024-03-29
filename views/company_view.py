@@ -1,11 +1,31 @@
+import tableprint as tp
+
+
 class CompanyView:
     """A class representing the view for a class Company"""
 
     def display_all_companies(self, companies: list) -> None:
-        print(companies)
+        header = tp.header(["Name Company", "Clients"], 30)
+        bottom = tp.bottom(2, 30)
+
+        print(header)
+        for company in companies:
+            for i in range(0, len(company.client)):
+                print(tp.row([company.name_company,
+                              company.client[i].name_client], 30)) if i == 0 else \
+                    print(tp.row(["", company.client[i].name_client], 30))   
+        print(bottom)      
 
     def display_company(self, company: object) -> None:
-        print(company)
+
+        header = tp.header(["Name Company", "Clients"], 30)
+        bottom = tp.bottom(2, 30)
+
+        print(header)
+        for i in range(0, len(company.client)):
+            print(tp.row([company.name_company, company.client[i].name_client], 30)) if i == 0 else \
+                print(tp.row(["", company.client[i].name_client], 30))   
+        print(bottom)         
 
     @staticmethod
     def create_company_success() -> None:
@@ -36,7 +56,7 @@ class CompanyView:
         print("Aucunes entreprises en base de donnée")
 
     @staticmethod
-    def update_company_name_succes() -> None:
+    def update_company_name_success() -> None:
         """Method to display a success message after
         the update of a company.
         """

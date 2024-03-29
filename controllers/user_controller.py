@@ -1,4 +1,4 @@
-import jwt, os
+import jwt, os, click
 
 from config.parameters import TOKEN_PATH
 from controllers.collaborator_controller import CollaboratorController
@@ -30,7 +30,7 @@ class UserController:
             else:
                 return True
 
-    def verify_token(self, token: str) -> bool:
+    def verify_token(self, ctx, param, token: str) -> bool:
         """
         Method to verify token
         Arguments:
@@ -41,12 +41,8 @@ class UserController:
         """
         try:
             payload = jwt.decode(token, key="maclesecrete", algorithms="HS256")
-            self.view.token_succes()
-            return True
+            return token
         except jwt.ExpiredSignatureError:
-            os.remove(TOKEN_PATH)
-            self.view.token_expired()
-            return False
+            raise click.BadParameter("le token a expiré")
         except jwt.InvalidTokenError:
-            self.view.token_invalid()
-            return False
+            raise click.BadParameter("le token est invalide")

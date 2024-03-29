@@ -20,7 +20,8 @@ class Event(Base):
     contract = relationship("Contract", back_populates="event")
 
     support_id = Column(Integer, ForeignKey("collaborators.id"))
-
+    support = relationship("Collaborator", back_populates="event")
+    
     location = Column(String)
     participants = Column(Integer)
     notes = Column(String)

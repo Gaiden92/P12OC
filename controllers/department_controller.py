@@ -79,6 +79,7 @@ class DepartmentController:
             any
         """
         department = self.dao.delete_department_by_id(id_department)
+        print(department)
         if department:
             return self.view.delete_department_success()
         else:

@@ -21,6 +21,8 @@ class Collaborator(Base):
 
     department_id = Column(Integer, ForeignKey("departments.id"))
     department = relationship("Department", back_populates="collaborators")
+    event = relationship("Event", back_populates="support")
+    client = relationship('Client', back_populates="commercial")
 
     # Vérification mot de passe
     def set_password(self, password: str):

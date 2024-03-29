@@ -1,3 +1,6 @@
+import tableprint as tp
+
+
 class ClientView:
     """A class representing the view for a class Client"""
 
@@ -7,7 +10,18 @@ class ClientView:
         Arguments:
             clients -- list: clients
         """
-        print(clients)
+        headers = ["Informations", "Valeurs"]
+        print(tp.header(headers,[15,30]))
+        for client in clients:
+            print(tp.row( ["Nom complet", client.name_client], [15,30]))
+            print(tp.row(["Email", client.email], [15,30]))
+            print(tp.row(["Phone", client.phone], [15,30]))
+            print(tp.row(["Create date", str(client.creation_date)], [15,30]))
+            print(tp.row(["Update date", str(client.update_date)], [15,30]))
+            print(tp.row(["Company", client.company.name_company], [15,30]))
+            print(tp.row(["Commmercial", client.commercial.name_collaborator], [15,30]))
+            print("-"*52)
+        print(tp.bottom(2, [15,30]))
 
     def display_client(self, client: object) -> None:
         """Method to display a client
@@ -15,7 +29,16 @@ class ClientView:
         Arguments:
             client -- object: client
         """
-        print(client)
+        headers = ["Informations", "Valeurs"]
+        print(tp.header(headers,[30,30]))
+        print(tp.row( ["Nom complet", client.name_client], 30))
+        print(tp.row(["Email", client.email], 30))
+        print(tp.row(["Phone", client.phone], 30))
+        print(tp.row(["Create date", str(client.creation_date)], 30))
+        print(tp.row(["Update date", str(client.update_date)], 30))
+        print(tp.row(["Company", client.company.name_company], 30))
+        print(tp.row(["Commercial", client.commercial.name_collaborator], 30))
+        print(tp.bottom(2, [30,30]))
 
     @staticmethod
     def create_client_success() -> None:
@@ -71,4 +94,10 @@ class ClientView:
         """Method to display a message that the user
         has not the permission to add or update a client.
         """
-        print("Vous n'êtes pas le commercial du client")     
+        print("Vous n'êtes pas le commercial du client")
+
+    @staticmethod
+    def email_invalid():
+        """Method to check if an email is valid
+        """
+        print("L'email est invalide.")

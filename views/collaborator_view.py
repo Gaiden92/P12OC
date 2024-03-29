@@ -7,7 +7,7 @@ class CollaboratorView:
     def login_success(self, token: str) -> None:
         """Method to display the user token and a success message.
         """
-        print("Vous êtes connecté. Votre token (valable 5 minutes):")
+        print("Vous êtes connecté. Votre token (valable 30 minutes):")
         print(token)
 
     def login_failed(self) -> None:
@@ -40,6 +40,7 @@ class CollaboratorView:
                 [
                     collaborator.id,
                     collaborator.name_collaborator,
+                    collaborator.contact,
                     collaborator.department.name_department
                 ],
                 width=20)
@@ -109,3 +110,10 @@ class CollaboratorView:
         tried to create a collaborator.
         """
         print("Le collaborateur n'a pas pu être supprimé.")
+
+    @staticmethod
+    def not_permission_collaborator() -> None:
+        """Method to display a failed message after
+        tried to create a collaborator if not permission.
+        """
+        print("Vous n'avez pas la permission d'ajouter un nouveau collaborateur.") 

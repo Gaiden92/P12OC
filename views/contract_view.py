@@ -1,3 +1,6 @@
+import tableprint as tp
+
+
 class ContractView:
     """A class representing the view for a class Contract"""
 
@@ -7,7 +10,16 @@ class ContractView:
         Arguments:
             contracts -- list: contracts
         """
-        print(contracts)
+        headers = ["Informations", "Valeurs"]
+        print(tp.header(headers,[30,30]))
+        for contract in contracts:
+            print(tp.row( ["Name client", contract.client.name_client], [30,30]))
+            print(tp.row(["Total amount", contract.total_amount], [30,30]))
+            print(tp.row(["Remaining amount", contract.remaining_amount], [30,30]))
+            print(tp.row(["Create date", str(contract.creation_date)], [30,30]))
+            print(tp.row(["Status", "Open" if contract.status == 1 else "Close"], [30,30]))
+            print("-"*67)
+        print(tp.bottom(2, [30,30]))
 
     def display_contract(self, contract: object) -> None:
         """Method to display one contract.
@@ -15,7 +27,14 @@ class ContractView:
         Arguments:
             contract -- object: contract
         """
-        print(contract)
+        headers = ["Informations", "Valeurs"]
+        print(tp.header(headers,[30,30]))
+        print(tp.row( ["Name client", contract.client.name_client], [30,30]))
+        print(tp.row(["Total amount", contract.total_amount], [30,30]))
+        print(tp.row(["Remaining amount", contract.remaining_amount], [30,30]))
+        print(tp.row(["Create date", str(contract.creation_date)], [30,30]))
+        print(tp.row(["Status", "Open" if contract.status == 1 else "Close"], [30,30]))
+        print(tp.bottom(2, [30,30]))
 
     @staticmethod
     def update_success() -> None:

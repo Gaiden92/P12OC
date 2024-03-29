@@ -6,6 +6,7 @@ from commands.collaborator_commands import collaborator_commands
 from commands.company_commands import company_commands
 from commands.contract_commands import contract_commands
 from commands.event_commands import event_commands
+from commands.department_commands import department_commands
 
 
 @click.group()
@@ -19,6 +20,7 @@ crm.add_command(collaborator_commands)
 crm.add_command(company_commands)
 crm.add_command(contract_commands)
 crm.add_command(event_commands)
+crm.add_command(department_commands)
 
 
 if __name__ == "__main__":

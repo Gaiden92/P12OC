@@ -1,3 +1,7 @@
+from tableprint import table
+import tableprint as tp
+
+
 class DepartmentView:
     """A class representing the view for a class Department"""
 
@@ -7,7 +11,22 @@ class DepartmentView:
         Arguments:
             departments -- list: departments
         """
-        print(departments)
+        data = []
+        for department in departments:
+            data.append(
+            
+                (department.id,
+                 department.name_department,
+                 ', '.join(
+                     [collaborator.name_collaborator for collaborator in department.collaborators])
+                    )
+            
+            )
+            
+        table(data, ['Id', "Departments", "Collaborators"])
+
+        
+
 
     def display_department(self, department: object) -> None:
         """Method to display one department.
@@ -15,7 +34,17 @@ class DepartmentView:
         Arguments:
             department -- object: department
         """
-        print(department)
+        data = [
+            
+                (department.id,
+                 department.name_department,
+                 ', '.join(
+                     [collaborator.name_collaborator for collaborator in department.collaborators])
+                    )
+            
+        ]
+
+        table(data, ['Id', "Departments", "Collaborators"])
 
     @staticmethod
     def update_success() -> None:

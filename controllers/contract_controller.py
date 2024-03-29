@@ -3,6 +3,8 @@ from views.contract_view import ContractView
 from models.permissions import Permission
 from models.user import User
 
+
+
 class ContractController:
     """A class representing the contract controller"""
 
@@ -15,18 +17,19 @@ class ContractController:
         """
         self.dao = ContractDao()
         self.view = ContractView()
-        self.user = User.load_user()
-        self.permission = Permission(self.user)
+
 
     def create_contract(
         self, client_id: int, total_amount: float, remaining_amount: float
     ):
-        if not self.permission.isGestionDepartment():
+        user = User.load_user()
+        permission = Permission(user)
+        if not permission.isGestionDepartment():
             return self.view.not_permission_contract()
-        total_amount_int = total_amount * 100
-        remaining_amount_int = remaining_amount * 100
+        total_amount= total_amount
+        remaining_amount = remaining_amount
         contract = self.dao.create_contract(
-            client_id, total_amount_int, remaining_amount_int
+            client_id, total_amount, remaining_amount
         )
         if contract:
             self.view.create_contract_success()
@@ -39,7 +42,8 @@ class ContractController:
         Returns:
             object: contract object
         """
-
+        user = User.load_user()
+        permission = Permission(user)
         contract = self.dao.select_contract_by_id(id)
         if contract:
             return self.view.display_contract(contract)
@@ -52,7 +56,8 @@ class ContractController:
         Returns:
             list: list of contracts
         """
-
+        user = User.load_user()
+        permission = Permission(user)
         contracts = self.dao.select_all_contracts()
         if contracts:
             return self.view.display_all_contracts(contracts)
@@ -82,10 +87,12 @@ class ContractController:
 
     def update_remaining_amount_by_id(self, id: int, new_remaining_amount: float):
         contract = self.dao.select_contract_by_id(id)
-        if not self.permission.isCommercialOfContract(contract):
+        user = User.load_user()
+        permission = Permission(user)
+        if not permission.isCommercialOfContract(contract):
             return self.view.not_permission_commercial_contract()
-        new_remaining_amount_int = new_remaining_amount * 100
-        contract = self.dao.update_remaining_amount_by_id(id, new_remaining_amount_int)
+        
+        contract = self.dao.update_remaining_amount_by_id(id, new_remaining_amount)
         if contract:
             self.view.update_success()
         else:
@@ -93,10 +100,11 @@ class ContractController:
 
     def update_total_amount_by_id(self, id: int, new_total_amount: float):
         contract = self.dao.select_contract_by_id(id)
-        if not self.permission.isCommercialOfContract(contract):
+        user = User.load_user()
+        permission = Permission(user)
+        if not permission.isCommercialOfContract(contract):
             return self.view.not_permission_commercial_contract()
-        new_total_amount_int = new_total_amount * 100
-        contract = self.dao.update_total_amount_by_id(id, new_total_amount_int)
+        contract = self.dao.update_total_amount_by_id(id, new_total_amount)
         if contract:
             self.view.update_success()
         else:
@@ -104,7 +112,9 @@ class ContractController:
 
     def update_status_by_id(self, id: int, status: str):
         contract = self.dao.select_contract_by_id(id)
-        if not self.permission.isCommercialOfContract(contract):
+        user = User.load_user()
+        permission = Permission(user)
+        if not permission.isCommercialOfContract(contract):
             return self.view.not_permission_commercial_contract()
         match status:
             case "open":
@@ -118,8 +128,10 @@ class ContractController:
             self.view.update_failed()
 
     def update_client_contract_by_id(self, id: int, id_client: int):
+        user = User.load_user()
+        permission = Permission(user)
         contract = self.dao.select_contract_by_id(id)
-        if not self.permission.isCommercialOfContract(contract):
+        if not permission.isCommercialOfContract(contract):
             return self.view.not_permission_commercial_contract()
         contract = self.dao.update_client_contract_by_id(id, id_client)
         if contract:

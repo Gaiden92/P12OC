@@ -1,3 +1,6 @@
+import tableprint as tp
+
+
 class EventView:
     """A class representing the view for a class Event"""
 
@@ -7,7 +10,21 @@ class EventView:
         Arguments:
             events -- list: events
         """
-        print(events)
+        headers = ["Informations", "Valeurs"]
+        print(tp.header(headers,[30, 60]))
+        for event in events:
+            print(tp.row(["Event id", str(event.id)], [30, 60]))
+            print(tp.row( ["Name event", event.event_name], [30, 60]))
+            print(tp.row(["Contract id", str(event.contract_id)], [30, 60]))
+            print(tp.row(["Client name", event.contract.client.name_client], [30, 60]))
+            print(tp.row(["Start date", str(event.start_date)], [30, 60]))
+            print(tp.row(["End date", str(event.end_date)], [30, 60]))
+            print(tp.row(["Notes", event.notes], [30, 60]))
+            print(tp.row(["Participants", str(event.participants)], [30, 60]))
+            print(tp.row(["Location", event.location], [30, 60]))
+            print(tp.row(["Support id", str(event.support.name_collaborator)], [30, 60]))
+            print("-"*97)
+        print(tp.bottom(2, [30, 60]))
 
     def display_event(self, event: object) -> None:
         """Method to display one event.
@@ -15,7 +32,17 @@ class EventView:
         Arguments:
             event -- object:event
         """
-        print(event)
+        print(tp.row(["Event id", str(event.id)], [30, 60]))
+        print(tp.row( ["Name event", event.event_name], [30, 60]))
+        print(tp.row(["Contract id", str(event.contract_id)], [30, 60]))
+        print(tp.row(["Client name", event.contract.client.name_client], [30, 60]))
+        print(tp.row(["Start date", str(event.start_date)], [30, 60]))
+        print(tp.row(["End date", str(event.end_date)], [30, 60]))
+        print(tp.row(["Notes", event.notes], [30, 60]))
+        print(tp.row(["Participants", str(event.participants)], [30, 60]))
+        print(tp.row(["Location", event.location], [30, 60]))
+        print(tp.row(["Support id", str(event.support_id)], [30, 60]))
+        print(tp.bottom(2, [30, 60]))
 
     @staticmethod
     def create_event_success() -> None:

@@ -26,3 +26,5 @@ class Client(Base):
 
     commercial_id = Column(Integer, ForeignKey("collaborators.id"))
     contract = relationship("Contract", back_populates="client")
+    
+    commercial = relationship('Collaborator', back_populates="client")

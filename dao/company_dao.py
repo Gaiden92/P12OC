@@ -105,9 +105,8 @@ class CompanyDao:
             bool
         """
         company_to_delete = self.query.filter(Company.id == id_company)
-        if company_to_delete:
+        if company_to_delete.delete():
             try:
-                company_to_delete.delete()
                 self.session.commit()
                 return True
             except IntegrityError:

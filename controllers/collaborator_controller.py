@@ -1,4 +1,7 @@
+import click
+
 from dao.collaborator_dao import CollaboratorDao
+from dao.department_dao import DepartmentDao
 from views.collaborator_view import CollaboratorView
 from models.permissions import Permission
 from models.user import User
@@ -16,8 +19,8 @@ class CollaboratorController:
         """
         self.dao = CollaboratorDao()
         self.view = CollaboratorView()
-        self.user = User.load_user()
-        self.permission = Permission(self.user)
+        self.department_dao = DepartmentDao()
+
 
     def create_collaborator(
         self, name: str, contact: str, password: str, department_id: int
@@ -30,7 +33,9 @@ class CollaboratorController:
             password -- str: password collaborator
             department_id -- int: departmend_id
         """
-        if not self.permission.isGestionDepartment():
+        user = User.load_user()
+        permission = Permission(user)
+        if not permission.isGestionDepartment():
             return self.view.not_permission_collaborator()
         if self.dao.create_collaborator(name, contact, password, department_id):
             self.view.create_collaborator_success()
@@ -73,7 +78,9 @@ class CollaboratorController:
         Returns:
             view
         """
-        if not self.permission.isGestionDepartment():
+        user = User.load_user()
+        permission = Permission(user)
+        if not permission.isGestionDepartment():
             return self.view.not_permission_collaborator()
         collaborator = self.dao.update_name_collaborator_by_id(id, new_name)
         if collaborator:
@@ -95,10 +102,28 @@ class CollaboratorController:
         return self.dao.create_collaborator(name, contact, password, department_id)
 
     def delete_collaborator_by_id(self, id_collaborator: int) -> any:
-        if not self.permission.isGestionDepartment():
+        user = User.load_user()
+        permission = Permission(user)
+        if not permission.isGestionDepartment():
             return self.view.not_permission_collaborator()
         collaborator = self.dao.delete_collaborator_by_id(id_collaborator)
         if collaborator:
             return self.view.delete_collaborator_success()
         else:
             return self.view.delete_collaborator_failed()
+
+    def is_phone_valid(self, ctx, param, phone: str) -> str:
+        if not all(number.isdigit() for number in phone):
+            raise click.BadParameter("Le téléphone doit contenir que des chiffres.")
+        if not len(phone) == 10:
+            raise click.BadParameter("Le téléphone doit contenir 10 chiffres.")
+        else:
+            return phone
+        
+    def is_department_valid(self, ctx, param, departmend_id: int) -> int:
+        all_departments = self.department_dao.select_all_departments()
+        all_departments_ids = [department.id for department in all_departments]
+        if not departmend_id in all_departments_ids:
+            raise click.BadParameter("Ce département n'existe pas.")
+        else:
+            return departmend_id

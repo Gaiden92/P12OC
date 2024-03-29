@@ -150,9 +150,8 @@ class CollaboratorDao:
             bool
         """
         collaborator_to_delete = self.query.filter(Collaborator.id == id_collaborator)
-        if collaborator_to_delete:
+        if collaborator_to_delete.delete():
             try:
-                collaborator_to_delete.delete()
                 self.session.commit()
                 return True
             except IntegrityError:

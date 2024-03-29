@@ -9,8 +9,9 @@ DB_NAME = "postgres"
 DB_SCHEMA = "epic_events"
 DB = Database(DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME, DB_SCHEMA)
 
-# constante fichier json
+# constantes fichier json
 TOKEN_PATH = "token/user.json"
+DELAY = 30
 
 # departements
 SUPPORT = "support"
