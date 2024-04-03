@@ -28,7 +28,7 @@ Une fois le contrat signé, le commercial crée l’événement dans la platefor
 
 ## Technologies utilisées
 
-<div align="center">
+<div>
 
 <ul>
     <li>Python</li>
@@ -84,6 +84,7 @@ pip install -r requirements.txt
 ###### • Installer PostgreSql et PGAdmin
 Liens : 
 https://www.postgresql.org/download/
+<br>
 https://www.pgadmin.org/download/
 
 Une fois connecté à PGadmin cliquer sur la base de donnée par défaut 'postgres' ou vous
