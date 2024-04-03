@@ -32,8 +32,7 @@ class Database:
         self.port = db_port
         self.name = db_name
         self.schema = db_schema
-        self.url = f"postgresql+psycopg2://{self.user}:\
-            {self.password}@{self.host}:{self.port}/{self.name}"
+        self.url = f"postgresql+psycopg2://{self.user}:{self.password}@{self.host}:{self.port}/{self.name}"
         self.engine = create_engine(
             self.url, connect_args={"options": f"-csearch_path={self.schema}"}
         )
