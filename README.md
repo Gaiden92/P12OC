@@ -1,10 +1,11 @@
-# OC-P12 : EPICEVENT - Développez une architecture back-end sécurisée avec Python et SQL
+![logo](logo.png)
+
+# Projet 12 DA-Python OC (Fouchal Sami)
+***Livrable du Projet 12 du parcours D-A Python d'OpenClassrooms : EPIC EVENT - Développez une architecture back-end sécurisée avec Python et SQL***
+
+_Testé sous Windows 10 - Python version 3.11.1_
 
 ## Objectif
-![logo](logo.png)
-Ce programme est un exercice proposé par [OpenClassRooms](https://openclassrooms.com/fr/) dans le cadre de la formation :
-Développeur concepteur Python.
-
 L'objectif est de développer une solution CRM sécurisée interne à l'entreprise Epic Events.
 Epic Events est une entreprise qui organise des événements pour ses clients.
 
