@@ -1,5 +1,6 @@
+<div align=center>
 ![logo](logo.png)
-
+</div>
 # Projet 12 DA-Python OC (Fouchal Sami)
 ***Livrable du Projet 12 du parcours D-A Python d'OpenClassrooms : EPIC EVENT - Développez une architecture back-end sécurisée avec Python et SQL***
 
