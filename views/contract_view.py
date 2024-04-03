@@ -11,16 +11,28 @@ class ContractView:
             contracts -- list: contracts
         """
         headers = ["Informations", "Valeurs"]
-        print(tp.header(headers,[30,30]))
+        print(tp.header(headers, [30, 30]))
         for contract in contracts:
-            print(tp.row( ["Name client", contract.client.commercial.name_collaborator], [30,30]))
-            print(tp.row( ["Name client", contract.client.name_client], [30,30]))
-            print(tp.row(["Total amount", str(contract.total_amount)+"€"], [30,30]))
-            print(tp.row(["Remaining amount", str(contract.remaining_amount)+"€"], [30,30]))
-            print(tp.row(["Create date", str(contract.creation_date)], [30,30]))
-            print(tp.row(["Status", "Open" if contract.status == 1 else "Close"], [30,30]))
+            print(tp.row(["Name client",
+                          contract.client.commercial.name_collaborator
+                          ], [30, 30]))
+            print(tp.row(["Name client",
+                          contract.client.name_client
+                          ], [30, 30]))
+            print(tp.row(["Total amount",
+                          str(contract.total_amount)+"€"
+                          ], [30, 30]))
+            print(tp.row(["Remaining amount",
+                          str(contract.remaining_amount)+"€"
+                          ], [30, 30]))
+            print(tp.row(["Create date",
+                          str(contract.creation_date)
+                          ], [30, 30]))
+            print(tp.row(["Status",
+                          "Open" if contract.status == 1 else "Close"
+                          ], [30, 30]))
             print("-"*67)
-        print(tp.bottom(2, [30,30]))
+        print(tp.bottom(2, [30, 30]))
 
     def display_contract(self, contract: object) -> None:
         """Method to display one contract.
@@ -29,14 +41,26 @@ class ContractView:
             contract -- object: contract
         """
         headers = ["Informations", "Valeurs"]
-        print(tp.header(headers,[30,30]))
-        print(tp.row( ["Name client", contract.client.commercial.name_collaborator], [30,30]))
-        print(tp.row( ["Name client", contract.client.name_client], [30,30]))
-        print(tp.row(["Total amount", str(contract.total_amount)+"€"], [30,30]))
-        print(tp.row(["Remaining amount", str(contract.remaining_amount)+"€"], [30,30]))
-        print(tp.row(["Create date", str(contract.creation_date)], [30,30]))
-        print(tp.row(["Status", "Open" if contract.status == 1 else "Close"], [30,30]))
-        print(tp.bottom(2, [30,30]))
+        print(tp.header(headers, [30, 30]))
+        print(tp.row(["Name client",
+                      contract.client.commercial.name_collaborator
+                      ], [30, 30]))
+        print(tp.row(["Name client",
+                      contract.client.name_client
+                      ], [30, 30]))
+        print(tp.row(["Total amount",
+                      str(contract.total_amount)+"€"
+                      ], [30, 30]))
+        print(tp.row(["Remaining amount",
+                      str(contract.remaining_amount)+"€"
+                      ], [30, 30]))
+        print(tp.row(["Create date",
+                      str(contract.creation_date)
+                      ], [30, 30]))
+        print(tp.row(["Status",
+                      "Open" if contract.status == 1 else "Close"
+                      ], [30, 30]))
+        print(tp.bottom(2, [30, 30]))
 
     @staticmethod
     def update_success() -> None:
@@ -99,8 +123,9 @@ class ContractView:
         """Method to display a message that the user
         has not the permission to add or update a contract.
         """
-        print("Vous n'avez pas les droits nécessaire pour ajouter ou modifier un contrat.")
-    
+        print("Vous n'avez pas les droits nécessaire \
+              pour ajouter ou modifier un contrat.")
+
     @staticmethod
     def not_permission_commercial_contract() -> None:
         """Method to display a message that the user

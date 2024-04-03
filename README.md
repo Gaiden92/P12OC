@@ -5,7 +5,7 @@
 # Projet 12 DA-Python OC (Fouchal Sami)
 ***Livrable du Projet 12 du parcours D-A Python d'OpenClassrooms : EPIC EVENT - Développez une architecture back-end sécurisée avec Python et SQL***
 
-_Testé sous Windows 10 - Python version 3.11.1_
+_Testé sous Windows 11 - Python version 3.11.4_
 
 ## Objectif
 L'objectif est de développer une solution CRM sécurisée interne à l'entreprise Epic Events.
@@ -85,19 +85,31 @@ pip install -r requirements.txt
 ```
 
 ###### • Installer PostgreSql et PGAdmin
-Liens : 
-https://www.postgresql.org/download/
-<br>
-https://www.pgadmin.org/download/
+<p>Liens :</p> 
 
-Une fois connecté à PGadmin cliquer sur la base de donnée par défaut 'postgres' ou vous
-pouvez en créer une nouvelle, puis clique droit dessus et "restore". Dans "filename",
-cliquez sur le dossier et allez chercher le fichier "db_script.sql" du projet.
+<a href='https://www.postgresql.org/download/' title="postgresql">Postgresql</a>
+
+<br>
+
+<a href='https://www.pgadmin.org/download/' title="Pgadmin">PGAdmin</a>
+
+
+Une fois connecté à PGadmin, sélectionner la base de donnée souhaité (par défault postgres) et effectuer un clique droit dessus puis cliquez sur "Restore".
+<img src="assets/postgresql1.png" alt="postgresql installation" align="center">
+
+Dans la rubrique "filename", cliquez sur le dossier et allez chercher le fichier "db_script.sql" du projet.
+<img src="assets/postgresql2.png" alt="postgresql installation" align="center">
+
+<img src="assets/postgresql3.png" alt="postgresql installation" align="center">
+
+Une fois le process terminé, clique droit sur la base de donnée et "Refresh"
+<img src="assets/postgresql4.png" alt="postgresql installation" align="center">
 
 ATTENTION: Vous devrez modifier le fichier "config/parameters.py" en fonction de vos données :
 - nom de la base (si vous en avez créer une nouvelle)
 - votre mot de passe d'administrateur
-- votre port
+- le port utilisé
+- le localhost
 ...
 Ne modifier pas les autres données sous peines de provoquer des erreurs dans l'application.
 

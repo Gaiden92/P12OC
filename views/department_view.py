@@ -21,13 +21,15 @@ class DepartmentView:
                             [
                                 department.id,
                                 department.name_department,
-                                department.collaborators[i].name_collaborator], 20))
+                                department.collaborators[i].name_collaborator
+                                ], 20))
                     else:
                         print(tp.row(
                             [
                                 "",
                                 "",
-                                department.collaborators[i].name_collaborator], 20))
+                                department.collaborators[i].name_collaborator
+                                ], 20))
             else:
                 print(tp.row(
                     [
@@ -53,13 +55,15 @@ class DepartmentView:
                         [
                             department.id,
                             department.name_department,
-                            department.collaborators[i].name_collaborator], 20))
+                            department.collaborators[i].name_collaborator
+                            ], 20))
                 else:
                     print(tp.row(
                         [
                             "",
                             "",
-                            department.collaborators[i].name_collaborator], 20))
+                            department.collaborators[i].name_collaborator
+                            ], 20))
         else:
             print(tp.row(
                 [

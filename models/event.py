@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship
 from .base import Base
 from models.contract import Contract
 
+
 class Event(Base):
     """A class represent of the event table
 

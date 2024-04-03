@@ -23,4 +23,5 @@ GESTION = "gestion"
 COMMERCIAL = "commercial"
 
 # Sentry clef publique
-DSN = "https://0564a7dfdb9cb640b6049d9369aa2cfd@o4507008616759296.ingest.us.sentry.io/4507008619839488"
+DSN = "https://0564a7dfdb9cb640b6049d9369aa2cfd@\
+    o4507008616759296.ingest.us.sentry.io/4507008619839488"

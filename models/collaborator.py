@@ -8,6 +8,7 @@ from models.event import Event
 from models.client import Client
 from models.department import Department
 
+
 class Collaborator(Base):
 
     __tablename__ = "collaborators"

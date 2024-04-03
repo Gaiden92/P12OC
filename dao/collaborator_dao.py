@@ -42,7 +42,6 @@ class CollaboratorDao:
         else:
             return None
 
-
     def select_all_collaborators_by_department_id(
             self,
             department_id: int) -> object:

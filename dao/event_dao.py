@@ -1,6 +1,3 @@
-from datetime import datetime
-from sqlalchemy import select
-
 from models.event import Event
 from config.parameters import DB
 
@@ -79,7 +76,7 @@ class EventDao:
         try:
             self.session.add(event)
             self.session.commit()
-        except Exception as ex:
+        except Exception:
             return False
         return True
 
@@ -101,7 +98,9 @@ class EventDao:
         else:
             return False
 
-    def update_contract_id_event_by_id(self, event_id: int, contract_id: int) -> bool:
+    def update_contract_id_event_by_id(self,
+                                       event_id: int,
+                                       contract_id: int) -> bool:
         """Method to update a event by his id.
 
         Arguments:
@@ -119,7 +118,9 @@ class EventDao:
         else:
             return False
 
-    def update_support_id_event_by_id(self, event_id: int, support_id: int) -> bool:
+    def update_support_id_event_by_id(self,
+                                      event_id: int,
+                                      support_id: int) -> bool:
         """Method to update a event by his id.
 
         Arguments:
@@ -137,7 +138,9 @@ class EventDao:
         else:
             return False
 
-    def update_location_event_by_id(self, event_id: int, location: str) -> bool:
+    def update_location_event_by_id(self,
+                                    event_id: int,
+                                    location: str) -> bool:
         """Method to update a event by his id.
 
         Arguments:
@@ -155,7 +158,9 @@ class EventDao:
         else:
             return False
 
-    def update_participants_event_by_id(self, event_id: int, participants: int) -> bool:
+    def update_participants_event_by_id(self,
+                                        event_id: int,
+                                        participants: int) -> bool:
         """Method to update a event by his id.
 
         Arguments:
@@ -173,7 +178,9 @@ class EventDao:
         else:
             return False
 
-    def update_notes_event_by_id(self, event_id: int, notes: str) -> bool:
+    def update_notes_event_by_id(self,
+                                 event_id: int,
+                                 notes: str) -> bool:
         """Method to update a event by his id.
 
         Arguments:
@@ -191,7 +198,9 @@ class EventDao:
         else:
             return False
 
-    def update_start_date_event_by_id(self, event_id: int, start_date: str) -> bool:
+    def update_start_date_event_by_id(self,
+                                      event_id: int,
+                                      start_date: str) -> bool:
         """Method to update a event by his id.
 
         Arguments:
@@ -209,7 +218,9 @@ class EventDao:
         else:
             return False
 
-    def update_end_date_event_by_id(self, event_id: int, end_date: str) -> bool:
+    def update_end_date_event_by_id(self,
+                                    event_id: int,
+                                    end_date: str) -> bool:
         """Method to update a event by his id.
 
         Arguments:

@@ -16,9 +16,9 @@ def crm():
     """Function to init the crm commands
     """
     sentry_sdk.init(
-    dsn=DSN,
-    enable_tracing=True,
-)
+        dsn=DSN,
+        enable_tracing=True)
+
 
 crm.add_command(user_commands)
 crm.add_command(client_commands)

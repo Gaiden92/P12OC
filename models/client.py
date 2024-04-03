@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship
 from .base import Base
 from models.company import Company
 
+
 class Client(Base):
     """A class represent of the client table
 
