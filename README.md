@@ -89,8 +89,6 @@ pip install -r requirements.txt
 
 <a href='https://www.postgresql.org/download/' title="postgresql">Postgresql</a>
 
-<br>
-
 <a href='https://www.pgadmin.org/download/' title="Pgadmin">PGAdmin</a>
 
 
