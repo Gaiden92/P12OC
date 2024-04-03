@@ -94,16 +94,24 @@ pip install -r requirements.txt
 <a href='https://www.pgadmin.org/download/' title="Pgadmin">PGAdmin</a>
 
 
-Une fois connecté à PGadmin, sélectionner la base de donnée souhaité (par défault postgres) et effectuer un clique droit dessus puis cliquez sur "Restore".
-<img src="assets/postgresql1.png" alt="postgresql installation" align="center" height="100px" width="auto">
+<p>Une fois connecté à PGadmin, sélectionner la base de donnée souhaité (par défault postgres) et effectuer un clique droit dessus puis cliquez sur "Restore".</p>
 
-Dans la rubrique "filename", cliquez sur le dossier et allez chercher le fichier "db_script.sql" du projet.
-<img src="assets/postgresql2.png" alt="postgresql installation" align="center" height="100px" width="auto">
+<div align=center>
+    <img src="assets/postgresql1.png" alt="postgresql installation" align="center" height="300px" width="auto">
+</div>
 
-<img src="assets/postgresql3.png" alt="postgresql installation" align="center" height="100px" width="auto">
+<p>Dans la rubrique "filename", cliquez sur le dossier et allez chercher le fichier "db_script.sql" du projet.</p>
+<div align=center>
+    <img src="assets/postgresql2.png" alt="postgresql installation" align="center" height="300px" width="auto">
+</div>
+<div align=center>
+    <img src="assets/postgresql3.png" alt="postgresql installation" align="center" height="300px" width="auto">
+</div>
 
-Une fois le process terminé, clique droit sur la base de donnée et "Refresh"
-<img src="assets/postgresql4.png" alt="postgresql installation" align="center">
+<p>Une fois le process terminé, clique droit sur la base de donnée et "Refresh"</p>
+<div align=center>
+<img src="assets/postgresql4.png" alt="postgresql installation" align="center" height="300px" width="auto">
+</div>
 
 ATTENTION: Vous devrez modifier le fichier "config/parameters.py" en fonction de vos données :
 - nom de la base (si vous en avez créer une nouvelle)
