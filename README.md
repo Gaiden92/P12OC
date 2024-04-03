@@ -1,7 +1,7 @@
 # OC-P12 : EPICEVENT - Développez une architecture back-end sécurisée avec Python et SQL
 
 ## Objectif
-![logo](assets/logo.png)
+![logo](logo.png)
 Ce programme est un exercice proposé par [OpenClassRooms](https://openclassrooms.com/fr/) dans le cadre de la formation :
 Développeur concepteur Python.
 
