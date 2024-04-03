@@ -1,13 +1,22 @@
 from dao.department_dao import DepartmentDao
 from config.parameters import GESTION, COMMERCIAL, SUPPORT
 
+
 class Permission:
-    def __init__(self, user) -> None:
+    """A represesentation Class of a permission
+    """
+    def __init__(self, user: object) -> None:
+        """Constructor of Permission class
+
+        Arguments:
+            user -- object: the current user object
+        """
         self.user = user
         self.department_dao = DepartmentDao()
 
     def isSupportDepartment(self) -> bool:
-        """Function to check if the user is a collaborator of support department
+        """Function to check if the user is a collaborator
+        of support department
 
         Arguments:
             user -- object: User
@@ -15,12 +24,13 @@ class Permission:
         Returns:
             bool
         """
-        department = self.department_dao.select_department_by_id(self.user.rights)
-        return department.name_department == SUPPORT
-
+        department = self.department_dao.select_department_by_id(
+            self.user.rights)
+        return department.name_department.lower() == SUPPORT
 
     def isCommercialDepartment(self) -> bool:
-        """Function to check if the user is a collaborator of commercial department
+        """Function to check if the user is a collaborator
+        of commercial department
 
         Arguments:
             user -- object: User
@@ -28,12 +38,14 @@ class Permission:
         Returns:
             bool
         """
-        department = self.department_dao.select_department_by_id(self.user.rights)
-        return department.name_department == COMMERCIAL
-
+        department = self.department_dao.select_department_by_id(
+            self.user.rights)
+        print(department)
+        return department.name_department.lower() == COMMERCIAL
 
     def isGestionDepartment(self) -> bool:
-        """Function to check if the user is a collaborator of gestion department
+        """Function to check if the user is a collaborator
+        of gestion department
 
         Arguments:
             user -- object: User
@@ -41,9 +53,9 @@ class Permission:
         Returns:
             bool
         """
-        department = self.department_dao.select_department_by_id(self.user.rights)
-        return department.name_department == GESTION
-
+        department = self.department_dao.select_department_by_id(
+            self.user.rights)
+        return department.name_department.lower() == GESTION
 
     def isCommercialOfContract(self, contract: object) -> bool:
         """Function to check if the user is the contract commercial
@@ -55,7 +67,7 @@ class Permission:
             bool
         """
         return self.user.id == contract.client.commercial_id
-    
+
     def isCommercialOfClient(self, client: object) -> bool:
         """Function to check if the user is the client commercial
 
@@ -66,6 +78,7 @@ class Permission:
             bool
         """
         return self.user.id == client.commercial_id
+
     def isCommercialOfEvent(self, event: object) -> bool:
         """Function to check if the user is the client commercial
             of the event

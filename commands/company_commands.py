@@ -10,6 +10,8 @@ controller_company = CompanyController()
 
 @click.group()
 def company_commands():
+    """Function to init company commands
+    """
     pass
 
 
@@ -26,7 +28,13 @@ def company_commands():
     help="name of the company",
     type=str
 )
-def add_company(token: str, name: str):
+def add(token: str, name: str) -> None:
+    """Function command to add a new company
+
+    Arguments:
+        token -- str: token user
+        name -- str: name company
+    """
     controller_company.create_company(name)
 
 
@@ -36,7 +44,12 @@ def add_company(token: str, name: str):
               help="token user",
               type=str,
               callback=controller_user.verify_token)
-def select_all_companies(token: str):
+def select_all(token: str) -> None:
+    """Function to select all companies
+
+    Arguments:
+        token -- str: token user
+    """
     controller_company.get_all_companies()
 
 
@@ -50,7 +63,13 @@ def select_all_companies(token: str):
               prompt="Enter the company id",
               help="the company id",
               type=int)
-def select_company_by_id(token: str, id: int):
+def select_by_id(token: str, id: int) -> None:
+    """Function to select a company by his id
+
+    Arguments:
+        token -- str: token user
+        id -- int: company id
+    """
     controller_company.get_company_by_id(id)
 
 
@@ -70,16 +89,32 @@ def select_company_by_id(token: str, id: int):
     help="new name of the company",
     type=str,
 )
-def update_company_name_by_id(token: str, id: int, new_name: str):
+def update_name_by_id(token: str, id: int, new_name: str) -> None:
+    """Function command to update a name company
+
+    Arguments:
+        token -- str: token user
+        id -- int: id company
+        new_name -- str: new name company
+    """
     controller_company.update_company_name_by_id(id, new_name)
 
 
 @company_commands.command()
-@click.option("--token", 
+@click.option("--token",
               prompt="Enter your token",
               help="token user",
               type=str,
               callback=controller_user.verify_token)
-@click.option("--id", prompt="Enter the company ID", help="ID of the company", type=int)
-def delete_company_by_id(token: str, id: int):
+@click.option("--id",
+              prompt="Enter the company ID",
+              help="ID of the company",
+              type=int)
+def delete_by_id(token: str, id: int) -> None:
+    """Function command to delete a company by his id
+
+    Arguments:
+        token -- str: token user
+        id -- int: company id
+    """
     controller_company.delete_company_by_id(id)

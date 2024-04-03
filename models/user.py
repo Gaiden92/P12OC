@@ -1,4 +1,5 @@
-import json, jwt
+import json
+import jwt
 from datetime import datetime, timedelta
 
 from config.parameters import TOKEN_PATH, DELAY
@@ -25,7 +26,10 @@ class User:
         """
         expiration_time = datetime.utcnow() + timedelta(minutes=DELAY)
 
-        payload = {"user_id": self.id, "rights": self.rights, "exp": expiration_time}
+        payload = {
+            "user_id": self.id,
+            "rights": self.rights,
+            "exp": expiration_time}
         return jwt.encode(payload, algorithm="HS256", key="maclesecrete")
 
     def register_info(self):

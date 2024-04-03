@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, schema, text
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from models.base import Base
@@ -73,6 +73,7 @@ class Database:
     def drop_all_tables(self):
         Base.metadata.drop_all(self.engine)
         print("Les tables ont bien été supprimées")
+
 
     def get_session(self):
         return self.session

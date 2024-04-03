@@ -14,39 +14,41 @@ class CollaboratorController:
         """
         Constructs all necessary attributes of the class
 
-        Arguments:
-            database -- str: the database to manage
         """
         self.dao = CollaboratorDao()
         self.view = CollaboratorView()
         self.department_dao = DepartmentDao()
-
+        self.user = User.load_user()
+        self.permission = Permission(self.user)
 
     def create_collaborator(
         self, name: str, contact: str, password: str, department_id: int
-    ):
-        """Method to create a collaborator
+    ) -> None:
+        """Method to control the collaborator creation
 
         Arguments:
             name -- name collaborator
             contact -- contact collabroator
             password -- str: password collaborator
             department_id -- int: departmend_id
+        Returns:
+        None
         """
-        user = User.load_user()
-        permission = Permission(user)
-        if not permission.isGestionDepartment():
+        if not self.permission.isGestionDepartment():
             return self.view.not_permission_collaborator()
-        if self.dao.create_collaborator(name, contact, password, department_id):
+        if self.dao.create_collaborator(name,
+                                        contact,
+                                        password,
+                                        department_id):
             self.view.create_collaborator_success()
         else:
             self.view.create_collaborator_failed()
 
-    def get_collaborator_by_id(self, id) -> object:
-        """Method to get collaborator by id
+    def get_collaborator_by_id(self, id: int) -> None:
+        """Method to control the select collaborator by his id
 
         Returns:
-            object: Collaborator object
+            None
         """
 
         collaborator = self.dao.select_collaborator_by_id(id)
@@ -55,11 +57,11 @@ class CollaboratorController:
         else:
             return self.view.collaborator_not_exist()
 
-    def get_all_collaborators(self) -> list:
-        """Method to get all collaborators by id
+    def get_all_collaborators(self) -> None:
+        """Method to control get all collaborators by id
 
         Returns:
-            list: list of collaborators
+            None
         """
         collaborators = self.dao.select_all_collaborators()
         if collaborators:
@@ -67,20 +69,17 @@ class CollaboratorController:
         else:
             return self.view.none_collaborators()
 
-    def update_collaborator_name_by_id(self, id: int, new_name: str) -> any:
-
-        """Method to update a collaborator by his id
+    def update_collaborator_name_by_id(self, id: int, new_name: str) -> None:
+        """Method to control the update of a collaborator by his id
 
         Arguments:
             id -- int: collaborator id
             new_name -- str: collaborator new name
 
         Returns:
-            view
+            None
         """
-        user = User.load_user()
-        permission = Permission(user)
-        if not permission.isGestionDepartment():
+        if not self.permission.isGestionDepartment():
             return self.view.not_permission_collaborator()
         collaborator = self.dao.update_name_collaborator_by_id(id, new_name)
         if collaborator:
@@ -88,7 +87,37 @@ class CollaboratorController:
         else:
             return self.view.update_collaborator_failed()
 
-    def check_login(self, id: int, password: str):
+    def update_collaborator_contact_by_id(self,
+                                          id: int,
+                                          new_contact: str) -> None:
+        """Method to contorl the update of a collaborator by his id
+
+        Arguments:
+            id -- int: collaborator id
+            new_contact -- str: collaborator new contact
+
+        Returns:
+            None
+        """
+        if not self.permission.isGestionDepartment():
+            return self.view.not_permission_collaborator()
+        collaborator = self.dao.update_contact_collaborator_by_id(id,
+                                                                  new_contact)
+        if collaborator:
+            return self.view.update_collaborator_success()
+        else:
+            return self.view.update_collaborator_failed()
+
+    def check_login(self, id: int, password: str) -> None:
+        """Method to control the login
+
+        Arguments:
+            id -- int: id of the collaborator
+            password -- str: password of the collaborator
+
+        Returns:
+            None
+        """
         collaborator = self.dao.select_collaborator_by_id(id)
         if collaborator.check_password(password):
             current_user = User(id, collaborator.department_id)
@@ -98,13 +127,16 @@ class CollaboratorController:
         else:
             return self.view.login_failed()
 
-    def verify_informations(self, name, contact, password, department_id):
-        return self.dao.create_collaborator(name, contact, password, department_id)
+    def delete_collaborator_by_id(self, id_collaborator: int) -> None:
+        """Method to control the collaborator suppresion
 
-    def delete_collaborator_by_id(self, id_collaborator: int) -> any:
-        user = User.load_user()
-        permission = Permission(user)
-        if not permission.isGestionDepartment():
+        Arguments:
+            id_collaborator -- int: id of the collaborator
+
+        Returns:
+            None
+        """
+        if not self.permission.isGestionDepartment():
             return self.view.not_permission_collaborator()
         collaborator = self.dao.delete_collaborator_by_id(id_collaborator)
         if collaborator:
@@ -112,18 +144,48 @@ class CollaboratorController:
         else:
             return self.view.delete_collaborator_failed()
 
-    def is_phone_valid(self, ctx, param, phone: str) -> str:
+    def is_phone_valid(self, ctx: object, param: object, phone: str) -> str:
+        """Method to control if a phone number is valid
+
+        Arguments:
+            ctx -- object: the context
+            param -- object: the parameter
+            phone -- str: the phone collaborator
+
+        Raises:
+            click.BadParameter: Exception: phone must have number only
+            click.BadParameter: Exception: phone must have 10 numbers
+
+        Returns:
+            str: the phone
+        """
         if not all(number.isdigit() for number in phone):
-            raise click.BadParameter("Le téléphone doit contenir que des chiffres.")
+            raise click.BadParameter("Phone must contains only numbers.")
         if not len(phone) == 10:
-            raise click.BadParameter("Le téléphone doit contenir 10 chiffres.")
+            raise click.BadParameter("Phone must have 10 numbers.")
         else:
             return phone
-        
-    def is_department_valid(self, ctx, param, departmend_id: int) -> int:
+
+    def is_department_valid(self,
+                            ctx: object,
+                            param: object,
+                            departmend_id: int) -> int:
+        """Method to control if a department id is valid
+
+        Arguments:
+            ctx -- object: the context
+            param -- object: the parameter
+            departmend_id -- int: the department id
+
+        Raises:
+            click.BadParameter: Exception: id is not exist
+
+        Returns:
+            int: department id
+        """
         all_departments = self.department_dao.select_all_departments()
         all_departments_ids = [department.id for department in all_departments]
-        if not departmend_id in all_departments_ids:
+        if departmend_id not in all_departments_ids:
             raise click.BadParameter("Ce département n'existe pas.")
         else:
             return departmend_id

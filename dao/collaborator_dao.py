@@ -1,4 +1,4 @@
-from sqlalchemy import select
+import sentry_sdk
 from sqlalchemy.exc import IntegrityError
 
 from models.collaborator import Collaborator
@@ -35,30 +35,17 @@ class CollaboratorDao:
         Returns:
             object or None
         """
-        collaborator = self.query.filter(Collaborator.id == collaborator_id).first()
-        if collaborator:
-            return collaborator
-        else:
-            return None
-
-    def select_collaborator_by_name(self, collaborator_name: str) -> object:
-        """Method to get collaborator by name
-
-        Arguments:
-            collaborator_name -- str: name of a collaborator
-
-        Returns:
-            object or None
-        """
         collaborator = self.query.filter(
-            Collaborator.name_collaborator == collaborator_name
-        ).first()
+            Collaborator.id == collaborator_id).first()
         if collaborator:
             return collaborator
         else:
             return None
 
-    def select_all_collaborators_by_department_id(self, department_id: int) -> object:
+
+    def select_all_collaborators_by_department_id(
+            self,
+            department_id: int) -> object:
         """Method to get collaborators by id department
 
         Arguments:
@@ -95,9 +82,10 @@ class CollaboratorDao:
         )
         collaborator.set_password(password)
         try:
-            self.session.add(collaborator)
-            self.session.commit()
-        except Exception as ex:
+            with sentry_sdk.start_transaction(name="add_collaborator"):
+                self.session.add(collaborator)
+                self.session.commit()
+        except Exception:
             return False
         return True
 
@@ -115,13 +103,40 @@ class CollaboratorDao:
         """
         collaborator_to_update = self.query.get(id_collaborator)
         if collaborator_to_update:
-            collaborator_to_update.name_collaborator = new_name
-            self.session.commit()
-            return True
+            with sentry_sdk.start_transaction(name="update_name_collaborator"):
+                collaborator_to_update.name_collaborator = new_name
+                self.session.commit()
+                return True
         else:
             return False
 
-    def update_password_by_id(self, id_collaborator: int, new_password: str):
+    def update_contact_collaborator_by_id(
+            self,
+            id_collaborator: int,
+            new_contact: str) -> bool:
+        """Method to update a collaborator by his id.
+
+        Arguments:
+            id_collaborator -- int: the id of the collaborator to update
+            new_contact -- str: the new contact of the collaborator
+
+        Returns:
+            bool
+        """
+        collaborator_to_update = self.query.get(id_collaborator)
+        if collaborator_to_update:
+            with sentry_sdk.start_transaction(
+                    name="update_contact_collaborator"):
+                collaborator_to_update.contact = new_contact
+                self.session.commit()
+                return True
+        else:
+            return False
+
+    def update_password_by_id(
+            self,
+            id_collaborator: int,
+            new_password: str):
         """Method to update a collaborator by his id.
 
         Arguments:
@@ -133,10 +148,11 @@ class CollaboratorDao:
         """
         collaborator_to_update = self.query.get(id_collaborator)
         if collaborator_to_update:
-            collaborator_to_update.set_password(new_password)
-
-            self.session.commit()
-            return True
+            with sentry_sdk.start_transaction(
+                    name="update_contact_collaborator"):
+                collaborator_to_update.set_password(new_password)
+                self.session.commit()
+                return True
         else:
             return False
 
@@ -149,7 +165,8 @@ class CollaboratorDao:
         Returns:
             bool
         """
-        collaborator_to_delete = self.query.filter(Collaborator.id == id_collaborator)
+        collaborator_to_delete = self.query.filter(
+            Collaborator.id == id_collaborator)
         if collaborator_to_delete.delete():
             try:
                 self.session.commit()

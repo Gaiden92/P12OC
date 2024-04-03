@@ -49,7 +49,6 @@ class EventDao:
         self,
         event_name: str,
         contract_id: int,
-        support_id: int,
         location: str,
         attendees: int,
         notes: str,
@@ -61,7 +60,6 @@ class EventDao:
         Arguments:
             event_name -- str: the name of the new event to add.
             contract_id -- int: the contract id
-            support_id -- int: the support support id
             location -- str: the event location
             attendees -- int: the event attendees
             notes -- str: the event notes
@@ -72,7 +70,6 @@ class EventDao:
         event = Event(
             event_name=event_name,
             contract_id=contract_id,
-            support_id=support_id,
             location=location,
             participants=attendees,
             notes=notes,

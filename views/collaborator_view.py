@@ -62,9 +62,7 @@ class CollaboratorView:
                     collaborator.name_collaborator,
                     collaborator.contact,
                     collaborator.department.name_department
-                ],
-                width=20)
-                )
+                ], width=20))
         print(tp.bottom(4, width=20))
 
     def update_collaborator_success(self) -> None:
@@ -73,7 +71,7 @@ class CollaboratorView:
         Arguments:
             collaborator -- object: collaborator
         """
-        print("Le collaborateur a bien été mis à jour")
+        print("The update has been success")
 
     def update_collaborator_failed(self) -> None:
         """Method to display message success of collaborator update
@@ -81,39 +79,39 @@ class CollaboratorView:
         Arguments:
             collaborator -- object: collaborator
         """
-        print("La mise à jour du nom de collaborateur a échoué")
+        print("The update has not work.")
 
     @staticmethod
     def create_collaborator_success() -> None:
         """Method to display a success message after the creation
         of a collaborator.
         """
-        print("Le collaborateur a été crée avec succès.")
+        print("The collaborator has been create.")
 
     @staticmethod
     def create_collaborator_failed() -> None:
         """Method to display a failed message after tried
         to create a collaborator.
         """
-        print("Echec de la création du nouveau collaborateur.")
+        print("Creation of a new collaborator echec.")
 
     @staticmethod
     def delete_collaborator_success() -> None:
         """Method to display a success message after
         the creation of a collaborator.
         """
-        print("Le collaborateur a bien été supprimé.")
+        print("The collaborator has been delete.")
 
     @staticmethod
     def delete_collaborator_failed() -> None:
         """Method to display a failed message after
         tried to create a collaborator.
         """
-        print("Le collaborateur n'a pas pu être supprimé.")
+        print("The collaborator didn't be deleted.")
 
     @staticmethod
     def not_permission_collaborator() -> None:
         """Method to display a failed message after
         tried to create a collaborator if not permission.
         """
-        print("Vous n'avez pas la permission d'ajouter un nouveau collaborateur.") 
+        print("You don't have the permission to create a new collaborator.")

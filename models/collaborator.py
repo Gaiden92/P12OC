@@ -4,10 +4,9 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 from .base import Base
-from models.department import Department
-from models.contract import Contract
 from models.event import Event
-
+from models.client import Client
+from models.department import Department
 
 class Collaborator(Base):
 

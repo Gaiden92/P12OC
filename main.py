@@ -1,4 +1,4 @@
-import click
+import click, sentry_sdk
 
 from commands.user_commands import user_commands
 from commands.client_commands import client_commands
@@ -11,8 +11,12 @@ from commands.department_commands import department_commands
 
 @click.group()
 def crm():
-    pass
-
+    """Function to init the crm commands
+    """
+    sentry_sdk.init(
+    dsn="https://0564a7dfdb9cb640b6049d9369aa2cfd@o4507008616759296.ingest.us.sentry.io/4507008619839488",
+    enable_tracing=True,
+)
 
 crm.add_command(user_commands)
 crm.add_command(client_commands)

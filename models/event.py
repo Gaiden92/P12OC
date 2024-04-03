@@ -1,8 +1,8 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DATETIME
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 
 from .base import Base
-
+from models.contract import Contract
 
 class Event(Base):
     """A class represent of the event table
@@ -21,9 +21,9 @@ class Event(Base):
 
     support_id = Column(Integer, ForeignKey("collaborators.id"))
     support = relationship("Collaborator", back_populates="event")
-    
+
     location = Column(String)
     participants = Column(Integer)
     notes = Column(String)
-    start_date = Column(DATETIME)
-    end_date = Column(DATETIME)
+    start_date = Column(DateTime)
+    end_date = Column(DateTime)

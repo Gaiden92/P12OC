@@ -1,4 +1,3 @@
-from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
 from models.company import Company
@@ -54,7 +53,8 @@ class CompanyDao:
         Returns:
             object or None
         """
-        company = self.query.filter(Company.name_company == company_search).first()
+        company = self.query.filter(
+            Company.name_company == company_search).first()
         if company:
             return company
         else:
@@ -73,11 +73,13 @@ class CompanyDao:
         try:
             self.session.add(company)
             self.session.commit()
-        except Exception as ex:
+        except Exception:
             return False
         return True
 
-    def update_name_company_by_id(self, id_company: int, new_name: str) -> bool:
+    def update_name_company_by_id(self,
+                                  id_company: int,
+                                  new_name: str) -> bool:
         """Method to update a company by his id.
 
         Arguments:

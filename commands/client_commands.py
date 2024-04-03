@@ -7,8 +7,11 @@ from controllers.client_controller import ClientController
 controller_user = UserController()
 controller_client = ClientController()
 
+
 @click.group()
 def client_commands():
+    """Function to initiate the client commands
+    """
     pass
 
 
@@ -20,7 +23,10 @@ def client_commands():
               type=str,
               callback=controller_user.verify_token)
 @click.option(
-    "--name", prompt="Enter the client name", help="name of the client", type=str
+    "--name",
+    prompt="Enter the client name",
+    help="name of the client",
+    type=str
 )
 @click.option(
     "--contact",
@@ -43,7 +49,16 @@ def client_commands():
     type=int,
     callback=controller_client.is_company_valid
 )
-def add_client(token: str, name: str, contact: str, email: str, company_id: int):        
+def add(token: str, name: str, contact: str, email: str, company_id: int) -> None:
+    """Function command to add a new client 
+
+    Arguments:
+        token -- str: token user
+        name -- str: client name
+        contact -- str: client phone
+        email -- str: client email
+        company_id -- int: company id
+    """
     controller_client.create_client(name, contact, email, company_id)
 
 
@@ -53,7 +68,12 @@ def add_client(token: str, name: str, contact: str, email: str, company_id: int)
               help="token user",
               type=str,
               callback=controller_user.verify_token)
-def select_all_clients(token: str):
+def select_all(token: str) -> None:
+    """Function command to select all client
+
+    Arguments:
+        token -- str: token user
+    """
     controller_client.get_all_clients()
 
 
@@ -63,8 +83,17 @@ def select_all_clients(token: str):
               help="token user",
               type=str,
               callback=controller_user.verify_token)
-@click.option("--id", prompt="Enter the client id", help="the client id", type=int)
-def select_client_by_id(token: str, id: int):
+@click.option("--id",
+              prompt="Enter the client id",
+              help="the client id",
+              type=int)
+def select_by_id(token: str, id: int) -> None:
+    """Function command to select by id a client
+
+    Arguments:
+        token -- str: token user
+        id -- int: client id
+    """
     controller_client.get_client_by_id(id)
 
 
@@ -74,14 +103,24 @@ def select_client_by_id(token: str, id: int):
               help="token user",
               type=str,
               callback=controller_user.verify_token)
-@click.option("--id", prompt="Enter the client ID", help="ID of the client", type=int)
+@click.option("--id",
+              prompt="Enter the client ID",
+              help="ID of the client",
+              type=int)
 @click.option(
     "--new_name",
     prompt="Enter the new client's name",
     help="new name of the client",
     type=str,
 )
-def update_client_name_by_id(token: str, id: int, new_name: str):
+def update_name_by_id(token: str, id: int, new_name: str) -> None:
+    """Function command to update a name client by id
+
+    Arguments:
+        token -- str: token user
+        id -- int: id client
+        new_name -- str: new name client
+    """
     controller_client.update_client_name_by_id(id, new_name)
 
 
@@ -91,7 +130,10 @@ def update_client_name_by_id(token: str, id: int, new_name: str):
               help="token user",
               type=str,
               callback=controller_user.verify_token)
-@click.option("--id", prompt="Enter the client ID", help="ID of the client", type=int)
+@click.option("--id",
+              prompt="Enter the client ID",
+              help="ID of the client",
+              type=int)
 @click.option(
     "--new_phone",
     prompt="Enter the new client's phone",
@@ -99,7 +141,14 @@ def update_client_name_by_id(token: str, id: int, new_name: str):
     type=str,
     callback=controller_client.is_phone_valid
 )
-def update_phone_client_by_id(token: str, id: int, new_phone: str):
+def update_phone_by_id(token: str, id: int, new_phone: str) -> None:
+    """Function command to update a phone client by id
+
+    Arguments:
+        token -- str: token user
+        id -- int: id client
+        new_phone -- str: new phone client
+    """
     controller_client.update_phone_client_by_id(id, new_phone)
 
 
@@ -109,7 +158,10 @@ def update_phone_client_by_id(token: str, id: int, new_phone: str):
               help="token user",
               type=str,
               callback=controller_user.verify_token)
-@click.option("--id", prompt="Enter the client ID", help="ID of the client", type=int)
+@click.option("--id",
+              prompt="Enter the client ID",
+              help="ID of the client",
+              type=int)
 @click.option(
     "--new_email",
     prompt="Enter the new client's email",
@@ -117,7 +169,7 @@ def update_phone_client_by_id(token: str, id: int, new_phone: str):
     type=str,
     callback=controller_client.is_email_valid
 )
-def update_email_client_by_id(token: str, id: int, new_email: str):
+def update_email_by_id(token: str, id: int, new_email: str) -> None:
     controller_client.update_email_client_by_id(id, new_email)
 
 
@@ -127,25 +179,10 @@ def update_email_client_by_id(token: str, id: int, new_email: str):
               help="token user",
               type=str,
               callback=controller_user.verify_token)
-@click.option("--id", prompt="Enter the client ID", help="ID of the client", type=int)
-@click.option(
-    "--id_company",
-    prompt="Enter the new client's id company",
-    help="new company id of the client",
-    type=int,
-    callback=controller_client.is_company_valid
-)
-def update_company_client_by_id(token: str, id: int, id_company: int):
-    controller_client.update_company_client_by_id(id, id_company)
-
-
-@client_commands.command()
-@click.option("--token",
-              prompt="Enter your token",
-              help="token user",
-              type=str,
-              callback=controller_user.verify_token)
-@click.option("--id", prompt="Enter the client ID", help="ID of the client", type=int)
+@click.option("--id",
+              prompt="Enter the client ID",
+              help="ID of the client",
+              type=int)
 @click.option(
     "--id_commercial",
     prompt="Enter the new client's id commercial",
@@ -153,8 +190,16 @@ def update_company_client_by_id(token: str, id: int, id_company: int):
     type=int,
     callback=controller_client.is_commercial_valid
 )
-def update_commercial_client_by_id(token: str, id: int, id_commercial: int):
+def update_commercial_by_id(token: str, id: int, id_commercial: int):
+    """Function command to update a commercial client by id
+
+    Arguments:
+        token -- str: token user
+        id -- int: id client
+        id_commercial -- int: id new commercial client
+ id    """
     controller_client.update_commercial_client_by_id(id, id_commercial)
+
 
 @client_commands.command()
 @click.option("--token",
@@ -162,6 +207,15 @@ def update_commercial_client_by_id(token: str, id: int, id_commercial: int):
               help="token user",
               type=str,
               callback=controller_user.verify_token)
-@click.option("--id", prompt="Enter the client ID", help="ID of the client", type=int)
-def delete_client_by_id(token: str, id: int):
+@click.option("--id",
+              prompt="Enter the client ID",
+              help="ID of the client",
+              type=int)
+def delete_by_id(token: str, id: int) -> None:
+    """Function command to delete a client by id
+
+    Arguments:
+        token -- str: token user
+        id -- int: id client
+    """
     controller_client.delete_client_by_id(id)

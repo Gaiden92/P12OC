@@ -1,7 +1,6 @@
 from dao.company_dao import CompanyDao
 from views.company_view import CompanyView
-from models.permissions import Permission
-from models.user import User
+
 
 class CompanyController:
     """A class representing the company controller"""
@@ -10,40 +9,40 @@ class CompanyController:
         """
         Constructs all necessary attributes of the class
 
-        Arguments:
-            database -- str: the database to manage
         """
         self.dao = CompanyDao()
         self.view = CompanyView()
 
-    def create_company(self, name: str):
+    def create_company(self, name: str) -> None:
+        """Method to control the company creation
 
+        Arguments:
+            name -- str: name company
+        """
         company = self.dao.create_company(name)
         if company:
             self.view.create_company_success()
         else:
             self.view.create_company_failed()
 
-    def get_company_by_id(self, id: int) -> object:
-        """Method to get company by id
+    def get_company_by_id(self, id: int) -> None:
+        """Method to controle the select company
 
         Returns:
-            object: company object
+            None
         """
-
         company = self.dao.select_company_by_id(id)
         if company:
             return self.view.display_company(company)
         else:
             return self.view.company_not_exist()
 
-    def get_all_companies(self) -> list:
+    def get_all_companies(self) -> None:
         """Method to get all companies by id
 
         Returns:
-            list: list of companies
+            None
         """
-
         companies = self.dao.select_all_companies()
         if companies:
             return self.view.display_all_companies(companies)
@@ -51,7 +50,7 @@ class CompanyController:
             return self.view.none_companies
 
     def update_company_name_by_id(self, id: int, new_name: str) -> None:
-        """Method to update a company name by his id.
+        """Method to control the company to update.
 
         Arguments:
             id -- int: id company
@@ -63,14 +62,14 @@ class CompanyController:
         else:
             self.view.update_company_name_failed()
 
-    def delete_company_by_id(self, id_company: int) -> any:
-        """Method to delete a company
+    def delete_company_by_id(self, id_company: int) -> None:
+        """Method to control a suppression company
 
         Arguments:
             id_company -- int: the company id to delete
 
         Returns:
-            any
+            None
         """
         company = self.dao.delete_company_by_id(id_company)
         if company:

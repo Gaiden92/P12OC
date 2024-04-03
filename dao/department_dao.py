@@ -1,4 +1,3 @@
-from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
 from models.department import Department
@@ -75,11 +74,13 @@ class DepartmentDao:
         try:
             self.session.add(department)
             self.session.commit()
-        except Exception as ex:
+        except Exception:
             return False
         return True
 
-    def update_name_department_by_id(self, id_department: int, new_name: str) -> bool:
+    def update_name_department_by_id(self,
+                                     id_department: int,
+                                     new_name: str) -> bool:
         """Method to update a department by his id.
 
         Arguments:
@@ -106,7 +107,8 @@ class DepartmentDao:
         Returns:
             bool
         """
-        department_to_delete = self.query.filter(Department.id == id_department)
+        department_to_delete = self.query.filter(
+            Department.id == id_department)
         if department_to_delete.delete():
             try:
                 self.session.commit()

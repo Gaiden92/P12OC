@@ -1,8 +1,6 @@
 from dao.department_dao import DepartmentDao
 from views.department_view import DepartmentView
-from .user_controller import UserController
-from models.permissions import Permission
-from models.user import User
+
 
 class DepartmentController:
     """A class representing the department controller"""
@@ -11,17 +9,15 @@ class DepartmentController:
         """
         Constructs all necessary attributes of the class
 
-        Arguments:
-            database -- str: the database to manage
         """
         self.dao = DepartmentDao()
         self.view = DepartmentView()
 
-    def create_department(self, department_name: str):
+    def create_department(self, department_name: str) -> None:
         """Method to create new department
 
         Returns:
-            department_name -- str: department name
+            None
         """
         department = self.dao.create_department(department_name)
 
@@ -30,11 +26,11 @@ class DepartmentController:
         else:
             return self.view.create_department_failed()
 
-    def get_department_by_id(self, id) -> object:
+    def get_department_by_id(self, id) -> None:
         """Method to get department by id
 
         Returns:
-            object: department object
+            None
         """
 
         department = self.dao.select_department_by_id(id)
@@ -43,11 +39,11 @@ class DepartmentController:
         else:
             return self.view.department_not_exist()
 
-    def get_all_departments(self) -> list:
+    def get_all_departments(self) -> None:
         """Method to get all departments by id
 
         Returns:
-            list: list of departments
+            None
         """
 
         departments = self.dao.select_all_departments()
@@ -56,11 +52,11 @@ class DepartmentController:
         else:
             return self.view.none_departments()
 
-    def update_department_name_by_id(self, id: int, new_name: str) -> object:
+    def update_department_name_by_id(self, id: int, new_name: str) -> None:
         """Method to get update name department by id
 
         Returns:
-            department -- object: Department
+            None
         """
 
         department = self.dao.update_name_department_by_id(id, new_name)
@@ -69,14 +65,14 @@ class DepartmentController:
         else:
             return self.view.update_failed()
 
-    def delete_department_by_id(self, id_department: int) -> any:
+    def delete_department_by_id(self, id_department: int) -> None:
         """Method to delete a department
 
         Arguments:
             id_department -- int: the department id to delete
 
         Returns:
-            any
+            None
         """
         department = self.dao.delete_department_by_id(id_department)
         print(department)

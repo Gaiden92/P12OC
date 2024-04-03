@@ -1,5 +1,4 @@
 from datetime import datetime
-from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
 from models.client import Client
@@ -62,7 +61,12 @@ class ClientDao:
             return None
 
     def create_client(
-        self, name: str, phone: str, email: str, company_id: int, commercial_id: int
+        self,
+        name: str,
+        phone: str,
+        email: str,
+        company_id: int,
+        commercial_id: int
     ) -> bool:
         """Method to insert new client in database.
 
@@ -85,7 +89,7 @@ class ClientDao:
         try:
             self.session.add(client)
             self.session.commit()
-        except Exception as ex:
+        except Exception:
             return False
         return True
 
@@ -108,7 +112,10 @@ class ClientDao:
         else:
             return False
 
-    def update_phone_client_by_id(self, id_client: int, new_phone: str) -> bool:
+    def update_phone_client_by_id(
+            self,
+            id_client: int,
+            new_phone: str) -> bool:
         """Method to update a phone client by his id.
 
         Arguments:
@@ -127,7 +134,10 @@ class ClientDao:
         else:
             return False
 
-    def update_email_client_by_id(self, id_client: int, new_email: str) -> bool:
+    def update_email_client_by_id(
+            self,
+            id_client: int,
+            new_email: str) -> bool:
         """Method to update a email client by his id.
 
         Arguments:
@@ -140,25 +150,6 @@ class ClientDao:
         client_to_update = self.query.get(id_client)
         if client_to_update:
             client_to_update.email = new_email
-            client_to_update.update_date = datetime.now()
-            self.session.commit()
-            return True
-        else:
-            return False
-
-    def update_company_client_by_id(self, id_client: int, id_new_company: int) -> bool:
-        """Method to update a company client by his id.
-
-        Arguments:
-            id_client -- int: the id of the client to update
-            id_new_company -- int: the new company of the client
-
-        Returns:
-            bool
-        """
-        client_to_update = self.query.get(id_client)
-        if client_to_update:
-            client_to_update.company_id = id_new_company
             client_to_update.update_date = datetime.now()
             self.session.commit()
             return True

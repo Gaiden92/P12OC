@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import select
+import sentry_sdk
 
 from models.contract import Contract
 from config.parameters import DB
@@ -62,9 +62,10 @@ class ContractDao:
             creation_date=datetime.now(),
         )
         try:
-            self.session.add(contract)
-            self.session.commit()
-        except Exception as ex:
+            with sentry_sdk.start_transaction(name="add_contract"):
+                self.session.add(contract)
+                self.session.commit()
+        except Exception:
             return False
         return True
 
@@ -75,7 +76,8 @@ class ContractDao:
 
         Arguments:
             id_contract -- int: the contract id to update
-            new_remaining_amount -- float: the new remaining amount of the contract
+            new_remaining_amount -- float: the new remaining
+            amount of the contract
 
         Returns:
             bool
@@ -108,7 +110,9 @@ class ContractDao:
         else:
             return False
 
-    def update_client_contract_by_id(self, id_contract: int, id_client: int) -> bool:
+    def update_client_contract_by_id(self,
+                                     id_contract: int,
+                                     id_client: int) -> bool:
         """Method to update a contract client by his id.
 
         Arguments:
@@ -126,7 +130,9 @@ class ContractDao:
         else:
             return False
 
-    def update_status_contract(self, id_contract: int, new_status: bool) -> bool:
+    def update_status_contract(self,
+                               id_contract: int,
+                               new_status: bool) -> bool:
         """Method to update a contract status by his id.
 
         Arguments:

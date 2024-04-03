@@ -13,9 +13,10 @@ class ContractView:
         headers = ["Informations", "Valeurs"]
         print(tp.header(headers,[30,30]))
         for contract in contracts:
+            print(tp.row( ["Name client", contract.client.commercial.name_collaborator], [30,30]))
             print(tp.row( ["Name client", contract.client.name_client], [30,30]))
-            print(tp.row(["Total amount", contract.total_amount], [30,30]))
-            print(tp.row(["Remaining amount", contract.remaining_amount], [30,30]))
+            print(tp.row(["Total amount", str(contract.total_amount)+"€"], [30,30]))
+            print(tp.row(["Remaining amount", str(contract.remaining_amount)+"€"], [30,30]))
             print(tp.row(["Create date", str(contract.creation_date)], [30,30]))
             print(tp.row(["Status", "Open" if contract.status == 1 else "Close"], [30,30]))
             print("-"*67)
@@ -29,9 +30,10 @@ class ContractView:
         """
         headers = ["Informations", "Valeurs"]
         print(tp.header(headers,[30,30]))
+        print(tp.row( ["Name client", contract.client.commercial.name_collaborator], [30,30]))
         print(tp.row( ["Name client", contract.client.name_client], [30,30]))
-        print(tp.row(["Total amount", contract.total_amount], [30,30]))
-        print(tp.row(["Remaining amount", contract.remaining_amount], [30,30]))
+        print(tp.row(["Total amount", str(contract.total_amount)+"€"], [30,30]))
+        print(tp.row(["Remaining amount", str(contract.remaining_amount)+"€"], [30,30]))
         print(tp.row(["Create date", str(contract.creation_date)], [30,30]))
         print(tp.row(["Status", "Open" if contract.status == 1 else "Close"], [30,30]))
         print(tp.bottom(2, [30,30]))

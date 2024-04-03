@@ -1,8 +1,13 @@
+import click
+
+from config.parameters import SUPPORT
 from dao.event_dao import EventDao
 from dao.contract_dao import ContractDao
+from dao.department_dao import DepartmentDao
 from views.event_view import EventView
 from models.permissions import Permission
 from models.user import User
+
 
 class EventController:
     """A class representing the event controller"""
@@ -16,29 +21,42 @@ class EventController:
         """
         self.dao = EventDao()
         self.view = EventView()
-
+        self.department_dao = DepartmentDao()
+        self.contract_dao = ContractDao()
+        self.user = User.load_user()
+        self.permission = Permission(self.user)
 
     def create_event(
         self,
         name: str,
         contract_id: int,
-        support_id: int,
         location: str,
         participants: int,
         notes: str,
         start_date: str,
         end_date: str,
     ):
+        """Method to control an event creation
+
+        Arguments:
+            name -- str: the event name
+            contract_id -- int: the contract id
+            location -- str: the event location
+            participants -- int: the participants number
+            notes -- str: the event notes
+            start_date -- str: the event start date
+            end_date -- str: the event end date
+
+        Returns:
+            None
+        """
         contract = ContractDao().select_contract_by_id(contract_id)
-        user = User.load_user()
-        permission = Permission(user)
-        if not permission.isCommercialOfContract(contract):
+        if not self.permission.isCommercialOfContract(contract):
             return self.view.not_permission_commercial_contract()
 
         event = self.dao.create_event(
             name,
             contract_id,
-            support_id,
             location,
             participants,
             notes,
@@ -116,10 +134,8 @@ class EventController:
             id -- int: the event id
             new_notes -- str: the event new notes
         """
-        user = User.load_user()
-        permission = Permission(user)
         event = self.dao.select_event_by_id(id)
-        if not permission.isSupportOfEvent(event):
+        if not self.permission.isSupportOfEvent(event):
             return self.view.not_permission_support_of_event()
         event = self.dao.update_notes_event_by_id(id, new_notes)
         if event:
@@ -134,10 +150,8 @@ class EventController:
             id -- int: the event id
             new_start_date -- str: the event new start date
         """
-        user = User.load_user()
-        permission = Permission(user)
         event = self.dao.select_event_by_id(id)
-        if not permission.isSupportOfEvent(event):
+        if not self.permission.isSupportOfEvent(event):
             return self.view.not_permission_support_of_event()
         event = self.dao.update_start_date_event_by_id(id, new_start_date)
         if event:
@@ -152,10 +166,8 @@ class EventController:
             id -- int: the event id
             new_end_date -- str: the event new end date
         """
-        user = User.load_user()
-        permission = Permission(user)
         event = self.dao.select_event_by_id(id)
-        if not permission.isSupportOfEvent(event):
+        if not self.permission.isSupportOfEvent(event):
             return self.view.not_permission_support_of_event()
         event = self.dao.update_end_date_event_by_id(id, new_end_date)
         if event:
@@ -170,10 +182,8 @@ class EventController:
             id -- int: the event id
             new_participants -- int: the event new participants
         """
-        user = User.load_user()
-        permission = Permission(user)
         event = self.dao.select_event_by_id(id)
-        if not permission.isSupportOfEvent(event):
+        if not self.permission.isSupportOfEvent(event):
             return self.view.not_permission_support_of_event()
         event = self.dao.update_participants_event_by_id(id, new_participants)
         if event:
@@ -188,13 +198,74 @@ class EventController:
             id -- int: the event id
             new_support_id -- int: the event new support id
         """
-        user = User.load_user()
-        permission = Permission(user)
         event = self.dao.select_event_by_id(id)
-        if not permission.isSupportOfEvent(event):
+        if not self.permission.isSupportDepartment():
             return self.view.not_permission_support_of_event()
         event = self.dao.update_support_id_event_by_id(id, new_support_id)
         if event:
             return self.view.update_event_success()
         else:
             return self.view.update_event_failed()
+
+    # Methodes de vérification
+    def is_email_valid(self, ctx: object, param: object, email:str) -> str:
+        """Method to control if an email is valid
+
+        Arguments:
+            ctx -- object: the context
+            param -- object: the parameters
+            email -- str: the 
+
+        Raises:
+            click.BadParameter: _description_
+
+        Returns:
+            _description_
+        """
+        if not "@" and ".fr" in email or "@" and ".com" in email:
+            raise click.BadParameter('This email is not valid. Please Try again.')
+        else:
+            return email
+        
+    def is_support_valid(self, ctx: object, param: object, id_support: int) -> None:
+        """Method to control if the support id exist
+
+        Arguments:
+            ctx -- object: the context
+            param -- object: the parameter
+            id_support -- int: the support id
+
+        Raises:
+            click.BadParameter: Exception: the support id didn't exist
+
+        Returns:
+            int: the support id
+        """
+        departments = self.department_dao.select_all_departments()
+        for department in departments:
+            if department.name_department == SUPPORT:
+                all_support_ids = [collaborator.id for collaborator in department.collaborators]
+        if id_support not in all_support_ids:
+            raise click.BadParameter("This support id doesn't exist.")
+        else:
+            return id_support
+        
+    def is_contract_valid(self, ctx: object, param: object, id_contract: int) -> None:
+        """Method to control if the contract id exist
+
+        Arguments:
+            ctx -- object: the context
+            param -- object: the parameter
+            id_contract -- int: the contract id
+
+        Raises:
+            click.BadParameter: Exception: the contract id didn't exist
+
+        Returns:
+            int: the contract id
+        """
+        all_contracts_id = [contract.id for contract in self.contract_dao.select_all_contracts()]
+        if id_contract not in all_contracts_id:
+            raise click.BadParameter("This contract id doesn't exist.")
+        else:
+            return id_contract

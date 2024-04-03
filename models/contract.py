@@ -1,8 +1,7 @@
-from sqlalchemy import Column, Integer, Date, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, Date, ForeignKey, Boolean, Float
 from sqlalchemy.orm import relationship
 
 from .base import Base
-from models.client import Client
 
 
 class Contract(Base):
@@ -18,8 +17,8 @@ class Contract(Base):
     client_id = Column(Integer, ForeignKey("clients.id"))
     client = relationship("Client", back_populates="contract")
 
-    total_amount = Column(Integer)
-    remaining_amount = Column(Integer)
+    total_amount = Column(Float)
+    remaining_amount = Column(Float)
     creation_date = Column(Date)
     status = Column(Boolean, default=True)
 

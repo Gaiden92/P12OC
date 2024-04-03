@@ -14,16 +14,27 @@ def event_commands():
 
 # Events
 @event_commands.command()
-@click.option("--token", prompt="Enter your token", help="token user", type=str)
-@click.option("--name", prompt="Enter the event name", help="event name", type=str)
+@click.option("--token",
+              prompt="Enter your token",
+              help="token user",
+              type=str, 
+              callback=controller_user.verify_token)
+@click.option("--name",
+              prompt="Enter the event name",
+              help="event name",
+              type=str)
 @click.option(
-    "--contract_id", prompt="Enter the contract id", help="id of the contract", type=int
+    "--contract_id",
+    prompt="Enter the contract id",
+    help="id of the contract",
+    type=int,
+    callback=controller_event.is_contract_valid
 )
 @click.option(
-    "--support_id", prompt="Enter the support id", help="id of the support", type=int
-)
-@click.option(
-    "--location", prompt="Enter the event location", help="event location", type=str
+    "--location",
+    prompt="Enter the event location",
+    help="event location",
+    type=str
 )
 @click.option(
     "--participants",
@@ -31,7 +42,11 @@ def event_commands():
     help="number of participant of the event",
     type=int,
 )
-@click.option("--notes", prompt="Enter the event notes", help="event notes", type=str)
+@click.option(
+    "--notes",
+    prompt="Enter the event notes",
+    help="event notes",
+    type=str)
 @click.option(
     "--start_date",
     prompt="Enter the event start date",
@@ -44,95 +59,183 @@ def event_commands():
     help="event end date",
     type=click.DateTime(formats=["%Y-%m-%d %H:%M"]),
 )
-def add_event(
+def add(
     token: str,
     name: str,
     contract_id: int,
-    support_id: int,
     location: str,
     participants: int,
     notes: str,
     start_date: object,
     end_date: object,
-):
-    if controller_user.verify_token(token):
-        controller_event.create_event(
-            name,
-            contract_id,
-            support_id,
-            location,
-            participants,
-            notes,
-            start_date,
-            end_date,
-        )
+) -> None:
+    """Function command to add a new event
+
+    Arguments:
+        token -- str: user token
+        name -- str: name event
+        contract_id -- int: id contract
+        location -- str: location event
+        participants -- int: participants event
+        notes -- str: notes event
+        start_date -- str: start date of the event
+        end_date -- str: end date of the event
+    """
+    controller_event.create_event(
+        name,
+        contract_id,
+        location,
+        participants,
+        notes,
+        start_date,
+        end_date,
+    )
 
 
 @event_commands.command()
-@click.option("--token", prompt="Enter your token", help="token user", type=str)
-def select_all_events(token: str):
-    if controller_user.verify_token(token):
-        controller_event.get_all_events()
+@click.option("--token",
+              prompt="Enter your token",
+              help="token user",
+              type=str,
+              callback=controller_user.verify_token)
+def select_all(token: str) -> None:
+    """Function command to select all events
+
+    Arguments:
+        token -- str: token user
+    """
+    controller_event.get_all_events()
 
 
 @event_commands.command()
-@click.option("--token", prompt="Enter your token", help="token user", type=str)
-@click.option("--id", prompt="Enter the event ID", help="event id", type=int)
-def select_event_by_id(token: str, id: int):
+@click.option("--token",
+              prompt="Enter your token",
+              help="token user",
+              type=str,
+              callback=controller_user.verify_token)
+@click.option("--id",
+              prompt="Enter the event ID",
+              help="event id",
+              type=int)
+def select_by_id(token: str, id: int) -> None:
+    """Function command to select an event by his id
 
-    if controller_user.verify_token(token):
-        controller_event.get_event_by_id(id)
+    Arguments:
+        token -- str: token user
+        id -- int: id event
+    """
+    controller_event.get_event_by_id(id)
 
 
 @event_commands.command()
-@click.option("--token", prompt="Enter your token", help="token user", type=str)
-@click.option("--id", prompt="Enter the event ID", help="event id", type=int)
+@click.option("--token",
+              prompt="Enter your token",
+              help="token user",
+              type=str,
+              callback=controller_user.verify_token)
+@click.option("--id",
+              prompt="Enter the event ID",
+              help="event id",
+              type=int)
 @click.option(
-    "--new_name", prompt="Enter the new event name", help="event new name", type=str
+    "--new_name",
+    prompt="Enter the new event name",
+    help="event new name",
+    type=str
 )
-def update_name_event_by_id(token: str, id: int, new_name: str):
-    if controller_user.verify_token(token):
-        controller_event.update_name_event_by_id(id, new_name)
+def update_name_by_id(token: str, id: int, new_name: str) -> None:
+    """Function command to update the name event
+
+    Arguments:
+        token -- str: token user
+        id -- int: id event
+        new_name -- str: new event name
+    """
+    controller_event.update_name_event_by_id(id, new_name)
 
 
 @event_commands.command()
-@click.option("--token", prompt="Enter your token", help="token user", type=str)
+@click.option("--token",
+              prompt="Enter your token",
+              help="token user",
+              type=str,
+              callback=controller_user.verify_token)
 @click.option("--id", prompt="Enter the event ID", help="event id", type=int)
 @click.option(
     "--contract_id",
     prompt="Enter the new contract id",
     help="new contract id",
     type=int,
+    callback=controller_event.is_contract_valid
 )
-def update_contract_id_event_by_id(token: str, id: int, contract_id: int):
-    if controller_user.verify_token(token):
-        controller_event.update_contract_id_event_by_id(id, contract_id)
+def update_contract_by_id(token: str,
+                          id: int,
+                          contract_id: int
+                          ) -> None:
+    """Function command to update the contract id event
+
+    Arguments:
+        token -- str: token user
+        id -- int: id event
+        contract_id -- int: contract id
+    """
+    controller_event.update_contract_id_event_by_id(id, contract_id)
 
 
 @event_commands.command()
-@click.option("--token", prompt="Enter your token", help="token user", type=str)
+@click.option("--token",
+              prompt="Enter your token",
+              help="token user",
+              type=str,
+              callback=controller_user.verify_token)
 @click.option("--id", prompt="Enter the event ID", help="event id", type=int)
 @click.option(
-    "--support_id", prompt="Enter the new support id", help="new support id", type=int
+    "--support_id",
+    prompt="Enter the new support id",
+    help="new support id",
+    type=int,
+    callback=controller_event.is_support_valid
 )
-def update_support_id_event_by_id(token: str, id: int, support_id: int):
-    if controller_user.verify_token(token):
-        controller_event.update_support_id_event_by_id(id, support_id)
+def update_support_by_id(token: str,
+                         id: int,
+                         support_id: int) -> None:
+    """Function command to update the support id event
+
+    Arguments:
+        token -- str: token user
+        id -- int: id event
+        support_id -- int: support id
+    """
+    controller_event.update_support_id_event_by_id(id, support_id)
 
 
 @event_commands.command()
-@click.option("--token", prompt="Enter your token", help="token user", type=str)
+@click.option("--token",
+              prompt="Enter your token",
+              help="token user",
+              type=str,
+              callback=controller_user.verify_token)
 @click.option("--id", prompt="Enter the event ID", help="event id", type=int)
 @click.option(
     "--new_location", prompt="Enter the new location", help="new location", type=str
 )
-def update_location_event_by_id(token: str, id: int, new_location: str):
-    if controller_user.verify_token(token):
-        controller_event.update_location_event_by_id(id, new_location)
+def update_location_by_id(token: str, id: int, new_location: str) -> None:
+    """Function command to update the location event
+
+    Arguments:
+        token -- str: token user
+        id -- int: id event
+        new_location -- str: new location
+    """
+    controller_event.update_location_event_by_id(id, new_location)
 
 
 @event_commands.command()
-@click.option("--token", prompt="Enter your token", help="token user", type=str)
+@click.option("--token",
+              prompt="Enter your token",
+              help="token user",
+              type=str,
+              callback=controller_user.verify_token)
 @click.option("--id", prompt="Enter the event ID", help="event id", type=int)
 @click.option(
     "--new_participants",
@@ -140,22 +243,42 @@ def update_location_event_by_id(token: str, id: int, new_location: str):
     help="new participants",
     type=int,
 )
-def update_participants_event_by_id(token: str, id: int, new_participants: int):
-    if controller_user.verify_token(token):
-        controller_event.update_participants_event_by_id(id, new_participants)
+def update_participants_by_id(token: str, id: int, new_participants: int) -> None:
+    """Function command to update the participants event
+
+    Arguments:
+        token -- str: token user
+        id -- int: id event
+        new_participants -- int: new participants
+    """
+    controller_event.update_participants_event_by_id(id, new_participants)
 
 
 @event_commands.command()
-@click.option("--token", prompt="Enter your token", help="token user", type=str)
+@click.option("--token",
+              prompt="Enter your token",
+              help="token user",
+              type=str,
+              callback=controller_user.verify_token)
 @click.option("--id", prompt="Enter the event ID", help="event id", type=int)
 @click.option("--new_notes", prompt="Enter the new notes", help="new notes", type=str)
-def update_notes_event_by_id(token: str, id: int, new_notes: str):
-    if controller_user.verify_token(token):
-        controller_event.update_notes_event_by_id(id, new_notes)
+def update_notes_by_id(token: str, id: int, new_notes: str):
+    """Function command to update the notes event
+
+    Arguments:
+        token -- str: token user
+        id -- int: id event
+        new_notes -- str: new notes
+    """
+    controller_event.update_notes_event_by_id(id, new_notes)
 
 
 @event_commands.command()
-@click.option("--token", prompt="Enter your token", help="token user", type=str)
+@click.option("--token",
+              prompt="Enter your token",
+              help="token user",
+              type=str,
+              callback=controller_user.verify_token)
 @click.option("--id", prompt="Enter the event ID", help="event id", type=int)
 @click.option(
     "--new_start_date",
@@ -163,13 +286,23 @@ def update_notes_event_by_id(token: str, id: int, new_notes: str):
     help="new start_date",
     type=click.DateTime(formats=["%Y-%m-%d %H:%M"]),
 )
-def update_start_date_event_by_id(token: str, id: int, new_start_date: str):
-    if controller_user.verify_token(token):
-        controller_event.update_start_date_event_by_id(id, new_start_date)
+def update_start_date_by_id(token: str, id: int, new_start_date: str) -> None:
+    """Function command to update the start date event
+
+    Arguments:
+        token -- str: token user
+        id -- int: id event
+        new_start_date -- str: new start date
+    """
+    controller_event.update_start_date_event_by_id(id, new_start_date)
 
 
 @event_commands.command()
-@click.option("--token", prompt="Enter your token", help="token user", type=str)
+@click.option("--token",
+              prompt="Enter your token",
+              help="token user",
+              type=str,
+              callback=controller_user.verify_token)
 @click.option("--id", prompt="Enter the event ID", help="event id", type=int)
 @click.option(
     "--new_end_date",
@@ -177,6 +310,12 @@ def update_start_date_event_by_id(token: str, id: int, new_start_date: str):
     help="new end_date",
     type=click.DateTime(formats=["%Y-%m-%d %H:%M"]),
 )
-def update_end_date_event_by_id(token: str, id: int, new_end_date: str):
-    if controller_user.verify_token(token):
-        controller_event.update_end_date_event_by_id(id, new_end_date)
+def update_end_date_by_id(token: str, id: int, new_end_date: str) -> None:
+    """Function command to update the end date event
+
+    Arguments:
+        token -- str: token user
+        id -- int: id event
+        new_end_date -- str: new end date
+    """
+    controller_event.update_end_date_event_by_id(id, new_end_date)

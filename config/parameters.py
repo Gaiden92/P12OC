@@ -1,6 +1,7 @@
 from .database import Database
 
-# constante de configuration de la base de donnée
+
+# constantes de configuration de la base de donnée
 DB_USER = "postgres"
 DB_PASSWORD = "superadmin"
 DB_HOST = "localhost"
