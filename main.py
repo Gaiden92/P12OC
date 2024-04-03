@@ -1,6 +1,7 @@
 import click
 import sentry_sdk
 
+from config.parameters import DSN
 from commands.user_commands import user_commands
 from commands.client_commands import client_commands
 from commands.collaborator_commands import collaborator_commands
@@ -15,7 +16,7 @@ def crm():
     """Function to init the crm commands
     """
     sentry_sdk.init(
-    dsn="https://0564a7dfdb9cb640b6049d9369aa2cfd@o4507008616759296.ingest.us.sentry.io/4507008619839488",
+    dsn=DSN,
     enable_tracing=True,
 )
 

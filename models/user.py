@@ -24,7 +24,7 @@ class User:
         Returns:
             bool: the token user
         """
-        expiration_time = datetime.utcnow() + timedelta(minutes=DELAY)
+        expiration_time = datetime.now() + timedelta(minutes=DELAY)
 
         payload = {
             "user_id": self.id,

@@ -1,6 +1,7 @@
 import jwt
 import click
 
+from config.parameters import SECRET_KEY
 from controllers.collaborator_controller import CollaboratorController
 from views.user_view import UserView
 
@@ -48,7 +49,7 @@ class UserController:
             str: token
         """
         try:
-            jwt.decode(token, key="maclesecrete", algorithms="HS256")
+            jwt.decode(token, key=SECRET_KEY, algorithms="HS256")
             return token
         except jwt.ExpiredSignatureError:
             raise click.BadParameter("Token are expired.")
