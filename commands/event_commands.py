@@ -17,7 +17,7 @@ def event_commands():
 @click.option("--token",
               prompt="Enter your token",
               help="token user",
-              type=str, 
+              type=str,
               callback=controller_user.verify_token)
 @click.option("--name",
               prompt="Enter the event name",
@@ -217,7 +217,10 @@ def update_support_by_id(token: str,
               callback=controller_user.verify_token)
 @click.option("--id", prompt="Enter the event ID", help="event id", type=int)
 @click.option(
-    "--new_location", prompt="Enter the new location", help="new location", type=str
+    "--new_location",
+    prompt="Enter the new location",
+    help="new location",
+    type=str
 )
 def update_location_by_id(token: str, id: int, new_location: str) -> None:
     """Function command to update the location event
@@ -236,14 +239,19 @@ def update_location_by_id(token: str, id: int, new_location: str) -> None:
               help="token user",
               type=str,
               callback=controller_user.verify_token)
-@click.option("--id", prompt="Enter the event ID", help="event id", type=int)
+@click.option("--id",
+              prompt="Enter the event ID",
+              help="event id",
+              type=int)
 @click.option(
     "--new_participants",
     prompt="Enter the new participants",
     help="new participants",
     type=int,
 )
-def update_participants_by_id(token: str, id: int, new_participants: int) -> None:
+def update_participants_by_id(token: str,
+                              id: int,
+                              new_participants: int) -> None:
     """Function command to update the participants event
 
     Arguments:
@@ -261,7 +269,10 @@ def update_participants_by_id(token: str, id: int, new_participants: int) -> Non
               type=str,
               callback=controller_user.verify_token)
 @click.option("--id", prompt="Enter the event ID", help="event id", type=int)
-@click.option("--new_notes", prompt="Enter the new notes", help="new notes", type=str)
+@click.option("--new_notes",
+              prompt="Enter the new notes",
+              help="new notes",
+              type=str)
 def update_notes_by_id(token: str, id: int, new_notes: str):
     """Function command to update the notes event
 

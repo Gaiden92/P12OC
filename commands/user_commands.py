@@ -6,6 +6,7 @@ from controllers.collaborator_controller import CollaboratorController
 controller_user = UserController()
 controller_collaborator = CollaboratorController()
 
+
 @click.group()
 def user_commands():
     """function to initiate the commands user

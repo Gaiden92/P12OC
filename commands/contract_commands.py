@@ -16,18 +16,17 @@ def contract_commands():
 
 # Contract commands
 @contract_commands.command()
-@click.option("--token", 
-prompt="Enter your token",
-help="token user",
-type=str,
-callback=controller_user.verify_token)
 @click.option(
-    "--client_id",
-    prompt="Enter the client id",
-    help="id of the client",
-    type=int,
-    callback=controller_contract.is_client_valid
-)
+    "--token",
+    prompt="Enter your token",
+    help="token user",
+    type=str,
+    callback=controller_user.verify_token)
+@click.option("--client_id",
+              prompt="Enter the client id",
+              help="id of the client",
+              type=int,
+              callback=controller_contract.is_client_valid)
 @click.option(
     "--total_amount",
     prompt="Enter the contract total amount ",
@@ -51,15 +50,18 @@ def add(
         total_amount -- float: total amount
         remaining_amount -- float: remaining amount
     """
-    controller_contract.create_contract(client_id, total_amount, remaining_amount)
+    controller_contract.create_contract(client_id,
+                                        total_amount,
+                                        remaining_amount)
 
 
 @contract_commands.command()
-@click.option("--token", 
-prompt="Enter your token",
-help="token user",
-type=str,
-callback=controller_user.verify_token)
+@click.option(
+    "--token",
+    prompt="Enter your token",
+    help="token user",
+    type=str,
+    callback=controller_user.verify_token)
 def select_all(token: str) -> None:
     """Function command to select all contracts
 
@@ -70,12 +72,16 @@ def select_all(token: str) -> None:
 
 
 @contract_commands.command()
-@click.option("--token", 
-prompt="Enter your token",
-help="token user",
-type=str,
-callback=controller_user.verify_token)
-@click.option("--id", prompt="Enter the contract ID", help="contract id", type=int)
+@click.option(
+    "--token",
+    prompt="Enter your token",
+    help="token user",
+    type=str,
+    callback=controller_user.verify_token)
+@click.option("--id",
+              prompt="Enter the contract ID",
+              help="contract id",
+              type=int)
 def select_by_id(token: str, id: int) -> None:
     """Function command to select a contract by his id
 
@@ -87,11 +93,12 @@ def select_by_id(token: str, id: int) -> None:
 
 
 @contract_commands.command()
-@click.option("--token", 
-prompt="Enter your token",
-help="token user",
-type=str,
-callback=controller_user.verify_token)
+@click.option(
+    "--token",
+    prompt="Enter your token",
+    help="token user",
+    type=str,
+    callback=controller_user.verify_token)
 def filter_by_remaining_amount_desc(token: str) -> None:
     """Function command to filter contract by remaining amount
 
@@ -102,11 +109,12 @@ def filter_by_remaining_amount_desc(token: str) -> None:
 
 
 @contract_commands.command()
-@click.option("--token", 
-prompt="Enter your token",
-help="token user",
-type=str,
-callback=controller_user.verify_token)
+@click.option(
+    "--token",
+    prompt="Enter your token",
+    help="token user",
+    type=str,
+    callback=controller_user.verify_token)
 def filter_by_total_amount_desc(token: str) -> None:
     """Function command to filter contract by total amount
 
@@ -117,11 +125,11 @@ def filter_by_total_amount_desc(token: str) -> None:
 
 
 @contract_commands.command()
-@click.option("--token", 
-prompt="Enter your token",
-help="token user",
-type=str,
-callback=controller_user.verify_token)
+@click.option("--token",
+              prompt="Enter your token",
+              help="token user",
+              type=str,
+              callback=controller_user.verify_token)
 def filter_by_status(token: str) -> None:
     """Function command to filter contract by status
 
@@ -132,11 +140,12 @@ def filter_by_status(token: str) -> None:
 
 
 @contract_commands.command()
-@click.option("--token", 
-prompt="Enter your token",
-help="token user",
-type=str,
-callback=controller_user.verify_token)
+@click.option(
+    "--token",
+    prompt="Enter your token",
+    help="token user",
+    type=str,
+    callback=controller_user.verify_token)
 @click.option(
     "--id", prompt="Enter the contract ID", help="ID of the contract", type=int
 )
@@ -146,7 +155,9 @@ callback=controller_user.verify_token)
     help="new remaining amount of the contract",
     type=float,
 )
-def update_remaining_amount_by_id(token: str, id: int, new_remaining_amount: float) -> None:
+def update_remaining_amount_by_id(token: str,
+                                  id: int,
+                                  new_remaining_amount: float) -> None:
     """Function command to update a contract remaining amount
 
     Arguments:
@@ -158,11 +169,12 @@ def update_remaining_amount_by_id(token: str, id: int, new_remaining_amount: flo
 
 
 @contract_commands.command()
-@click.option("--token", 
-prompt="Enter your token",
-help="token user",
-type=str,
-callback=controller_user.verify_token)
+@click.option(
+    "--token",
+    prompt="Enter your token",
+    help="token user",
+    type=str,
+    callback=controller_user.verify_token)
 @click.option(
     "--id", prompt="Enter the contract ID", help="ID of the contract", type=int
 )
@@ -172,7 +184,9 @@ callback=controller_user.verify_token)
     help="new total amount of the contract",
     type=float,
 )
-def update_total_amount_by_id(token: str, id: int, new_total_amount: float) -> None:
+def update_total_amount_by_id(token: str,
+                              id: int,
+                              new_total_amount: float) -> None:
     """Function command to update a contract total amount
 
     Arguments:
@@ -184,11 +198,12 @@ def update_total_amount_by_id(token: str, id: int, new_total_amount: float) -> N
 
 
 @contract_commands.command()
-@click.option("--token", 
-prompt="Enter your token",
-help="token user",
-type=str,
-callback=controller_user.verify_token)
+@click.option(
+    "--token",
+    prompt="Enter your token",
+    help="token user",
+    type=str,
+    callback=controller_user.verify_token)
 @click.option(
     "--id", prompt="Enter the contract ID", help="ID of the contract", type=int
 )
@@ -210,11 +225,12 @@ def update_status_by_id(token: str, id: int, status: str) -> None:
 
 
 @contract_commands.command()
-@click.option("--token", 
-prompt="Enter your token",
-help="token user",
-type=str,
-callback=controller_user.verify_token)
+@click.option(
+    "--token",
+    prompt="Enter your token",
+    help="token user",
+    type=str,
+    callback=controller_user.verify_token)
 @click.option(
     "--id", prompt="Enter the contract ID", help="ID of the contract", type=int
 )

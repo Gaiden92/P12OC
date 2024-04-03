@@ -9,7 +9,7 @@ controller_department = DepartmentController()
 
 @click.group()
 def department_commands():
-    """Function to init department commands 
+    """Function to init department commands
     """
     pass
 

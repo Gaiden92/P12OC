@@ -119,8 +119,6 @@ class EventController:
             id -- int: the event id
             new_location -- str: the event new location
         """
-        user = User.load_user()
-        permission = Permission(user)
         event = self.dao.update_location_event_by_id(id, new_location)
         if event:
             return self.view.update_event_success()
@@ -143,7 +141,9 @@ class EventController:
         else:
             return self.view.update_event_failed()
 
-    def update_start_date_event_by_id(self, id: int, new_start_date: str) -> None:
+    def update_start_date_event_by_id(self,
+                                      id: int,
+                                      new_start_date: str) -> None:
         """Method to update the event start date.
 
         Arguments:
@@ -175,7 +175,9 @@ class EventController:
         else:
             return self.view.update_event_failed()
 
-    def update_participants_event_by_id(self, id: int, new_participants: int) -> None:
+    def update_participants_event_by_id(self,
+                                        id: int,
+                                        new_participants: int) -> None:
         """Method to update the event participants.
 
         Arguments:
@@ -191,7 +193,9 @@ class EventController:
         else:
             return self.view.update_event_failed()
 
-    def update_support_id_event_by_id(self, id: int, new_support_id: int) -> None:
+    def update_support_id_event_by_id(self,
+                                      id: int,
+                                      new_support_id: int) -> None:
         """Method to update the event support id.
 
         Arguments:
@@ -208,13 +212,13 @@ class EventController:
             return self.view.update_event_failed()
 
     # Methodes de vérification
-    def is_email_valid(self, ctx: object, param: object, email:str) -> str:
+    def is_email_valid(self, ctx: object, param: object, email: str) -> str:
         """Method to control if an email is valid
 
         Arguments:
             ctx -- object: the context
             param -- object: the parameters
-            email -- str: the 
+            email -- str: the email
 
         Raises:
             click.BadParameter: _description_
@@ -223,11 +227,15 @@ class EventController:
             _description_
         """
         if not "@" and ".fr" in email or "@" and ".com" in email:
-            raise click.BadParameter('This email is not valid. Please Try again.')
+            raise click.BadParameter('This email is not valid.\
+                                     Please Try again.')
         else:
             return email
-        
-    def is_support_valid(self, ctx: object, param: object, id_support: int) -> None:
+
+    def is_support_valid(self,
+                         ctx: object,
+                         param: object,
+                         id_support: int) -> None:
         """Method to control if the support id exist
 
         Arguments:
@@ -244,13 +252,17 @@ class EventController:
         departments = self.department_dao.select_all_departments()
         for department in departments:
             if department.name_department == SUPPORT:
-                all_support_ids = [collaborator.id for collaborator in department.collaborators]
+                all_support_ids = [collaborator.id for
+                                   collaborator in department.collaborators]
         if id_support not in all_support_ids:
             raise click.BadParameter("This support id doesn't exist.")
         else:
             return id_support
-        
-    def is_contract_valid(self, ctx: object, param: object, id_contract: int) -> None:
+
+    def is_contract_valid(self,
+                          ctx: object,
+                          param: object,
+                          id_contract: int) -> None:
         """Method to control if the contract id exist
 
         Arguments:
@@ -264,7 +276,8 @@ class EventController:
         Returns:
             int: the contract id
         """
-        all_contracts_id = [contract.id for contract in self.contract_dao.select_all_contracts()]
+        all_contracts_id = [contract.id for contract in
+                            self.contract_dao.select_all_contracts()]
         if id_contract not in all_contracts_id:
             raise click.BadParameter("This contract id doesn't exist.")
         else:

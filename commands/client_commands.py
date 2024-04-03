@@ -49,8 +49,12 @@ def client_commands():
     type=int,
     callback=controller_client.is_company_valid
 )
-def add(token: str, name: str, contact: str, email: str, company_id: int) -> None:
-    """Function command to add a new client 
+def add(token: str,
+        name: str,
+        contact: str,
+        email: str,
+        company_id: int) -> None:
+    """Function command to add a new client
 
     Arguments:
         token -- str: token user

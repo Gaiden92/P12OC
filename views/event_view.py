@@ -11,21 +11,27 @@ class EventView:
             events -- list: events
         """
         headers = ["Informations", "Valeurs"]
-        print(tp.header(headers,[12, 80]))
+        print(tp.header(headers, [12, 80]))
         for event in events:
             print(tp.row(["Event id", str(event.id)], [12, 80]))
-            print(tp.row( ["Name event", event.event_name], [12, 80]))
+            print(tp.row(["Name event", event.event_name], [12, 80]))
             print(tp.row(["Contract id", str(event.contract_id)], [12, 80]))
-            print(tp.row(["Client name", event.contract.client.name_client], [12, 80]))
+            print(tp.row([
+                "Client name",
+                event.contract.client.name_client],
+                [12, 80]))
             print(tp.row(["Start date", str(event.start_date)], [12, 80]))
             print(tp.row(["End date", str(event.end_date)], [12, 80]))
             print(tp.row(["Notes", event.notes], [12, 80]))
             print(tp.row(["Participants", str(event.participants)], [12, 80]))
             print(tp.row(["Location", event.location], [12, 80]))
             if event.support:
-                print(tp.row(["Support id", str(event.support.name_collaborator)], [12, 80]))
+                print(tp.row([
+                    "Support id",
+                    str(event.support.name_collaborator)],
+                    [12, 80]))
             else:
-                print(tp.row(["Support id","pas de support"], [12, 80]))
+                print(tp.row(["Support id", "pas de support"], [12, 80]))
             print("-"*97)
         print(tp.bottom(2, [12, 80]))
 
@@ -36,18 +42,23 @@ class EventView:
             event -- object:event
         """
         print(tp.row(["Event id", str(event.id)], [12, 80]))
-        print(tp.row( ["Name event", event.event_name], [12, 80]))
+        print(tp.row(["Name event", event.event_name], [12, 80]))
         print(tp.row(["Contract id", str(event.contract_id)], [12, 80]))
-        print(tp.row(["Client name", event.contract.client.name_client], [12, 80]))
+        print(tp.row(["Client name",
+                      event.contract.client.name_client], [12, 80]))
         print(tp.row(["Start date", str(event.start_date)], [12, 80]))
         print(tp.row(["End date", str(event.end_date)], [12, 80]))
         print(tp.row(["Notes", event.notes], [12, 80]))
         print(tp.row(["Participants", str(event.participants)], [12, 80]))
         print(tp.row(["Location", event.location], [12, 80]))
         if event.support:
-            print(tp.row(["Support id", str(event.support.name_collaborator)], [12, 80]))
+            print(tp.row(
+                [
+                    "Support id",
+                    str(event.support.name_collaborator)
+                    ], [12, 80]))
         else:
-            print(tp.row(["Support id","pas de support"], [12, 80]))
+            print(tp.row(["Support id", "pas de support"], [12, 80]))
         print(tp.bottom(2, [12, 80]))
 
     @staticmethod

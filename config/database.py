@@ -32,7 +32,8 @@ class Database:
         self.port = db_port
         self.name = db_name
         self.schema = db_schema
-        self.url = f"postgresql+psycopg2://{self.user}:{self.password}@{self.host}:{self.port}/{self.name}"
+        self.url = f"postgresql+psycopg2://{self.user}:\
+            {self.password}@{self.host}:{self.port}/{self.name}"
         self.engine = create_engine(
             self.url, connect_args={"options": f"-csearch_path={self.schema}"}
         )
@@ -48,7 +49,7 @@ class Database:
             connect = self.engine.connect()
             print("Connexion à la base de donnée réussie.")
             return connect
-        except Exception as ex:
+        except Exception:
             print("La connexion à la base de donnée a échouée.")
             return None
 
@@ -62,7 +63,7 @@ class Database:
             deconnexion = self.engine.dispose()
             print("Déconnexion de la base de donnée réussie.")
             return deconnexion
-        except Exception as ex:
+        except Exception:
             print("La déconnexion de la base de donnée a échouée.")
             return None
 
@@ -73,7 +74,6 @@ class Database:
     def drop_all_tables(self):
         Base.metadata.drop_all(self.engine)
         print("Les tables ont bien été supprimées")
-
 
     def get_session(self):
         return self.session

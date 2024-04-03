@@ -199,8 +199,7 @@ class ContractController:
         contract = self.dao.select_contract_by_id(id)
         if (
            not self. permission.isCommercialOfContract(contract)
-            and not self.permission.isGestionDepartment()
-        ):
+                and not self.permission.isGestionDepartment()):
             return self.view.not_permission_contract()
         contract = self.dao.update_client_contract_by_id(id, id_client)
         if contract:

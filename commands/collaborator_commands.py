@@ -49,14 +49,18 @@ def collaborator_commands():
     type=int,
     callback=controller_collaborator.is_department_valid
 )
-def add(token: str, name: str, contact: str, password: str, department_id: id) -> None:
+def add(token: str,
+        name: str,
+        contact: str,
+        password: str,
+        department_id: id) -> None:
     """Function command to add a new collaborator
 
     Arguments:
         token -- str: token collaborator
         name -- str: name collaborator
         contact -- str: contact collaborator
-        password -- str: password collaborator        
+        password -- str: password collaborator
         id -- int: id department
     """
     controller_collaborator.create_collaborator(
