@@ -1,5 +1,5 @@
 <div align=center>
-    <img src="logo.png">
+    <img src="assets/logo.png">
 </div>
 
 # Projet 12 DA-Python OC (Fouchal Sami)
@@ -119,7 +119,7 @@ ATTENTION: Vous devrez modifier le fichier "config/parameters.py" en fonction de
 - le port utilisé
 - le localhost
 ...
-Ne modifier pas les autres données sous peines de provoquer des erreurs dans l'application.
+Ne pas modifier les autres données sous peine de provoquer des erreurs dans l'application.
 
 ## Utilisation
 
