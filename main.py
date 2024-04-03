@@ -1,4 +1,5 @@
-import click, sentry_sdk
+import click
+import sentry_sdk
 
 from commands.user_commands import user_commands
 from commands.client_commands import client_commands

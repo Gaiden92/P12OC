@@ -3,3 +3,7 @@ exclude =
     __pycache__
     .env/
     env/
+per-file-ignores =
+    client.py:F401
+    collaborator.py:F401
+    event.py:F401

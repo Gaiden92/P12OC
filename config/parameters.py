@@ -3,6 +3,9 @@ from .database import Database
 
 # constantes de configuration de la base de donnée
 DB_USER = "postgres"
+
+# Modifier les données en fonction de votre configuration :
+# (mot de passe admin, port, nom de la base de donnée)
 DB_PASSWORD = "superadmin"
 DB_HOST = "localhost"
 DB_PORT = "5433"
