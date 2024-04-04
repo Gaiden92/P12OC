@@ -1,5 +1,7 @@
 from dao.company_dao import CompanyDao
 from views.company_view import CompanyView
+from models.permissions import Permission
+from models.user import User
 
 
 class CompanyController:
@@ -12,6 +14,7 @@ class CompanyController:
         """
         self.dao = CompanyDao()
         self.view = CompanyView()
+        self.permission = Permission(User.load_user())
 
     def create_company(self, name: str) -> None:
         """Method to control the company creation
@@ -19,6 +22,8 @@ class CompanyController:
         Arguments:
             name -- str: name company
         """
+        if not self.permission.isGestionDepartment():
+            return self.view.not_permission()
         company = self.dao.create_company(name)
         if company:
             self.view.create_company_success()
@@ -56,6 +61,8 @@ class CompanyController:
             id -- int: id company
             new_name -- str: name company
         """
+        if not self.permission.isGestionDepartment():
+            return self.view.not_permission()
         company = self.dao.update_name_company_by_id(id, new_name)
         if company:
             self.view.update_company_name_success()
@@ -71,6 +78,8 @@ class CompanyController:
         Returns:
             None
         """
+        if not self.permission.isGestionDepartment():
+            return self.view.not_permission()
         company = self.dao.delete_company_by_id(id_company)
         if company:
             return self.view.delete_company_success()

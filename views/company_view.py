@@ -49,6 +49,13 @@ class CompanyView:
         print(bottom)
 
     @staticmethod
+    def not_permission() -> None:
+        """Method to display a failed message if the
+        collaborator are not the permission.
+        """
+        print("You are not the permission to perform this action.")
+
+    @staticmethod
     def create_company_success() -> None:
         """Method to display a success message after the creation
         of a company.
@@ -81,25 +88,25 @@ class CompanyView:
         """Method to display a success message after
         the update of a company.
         """
-        print("L'entreprise a bien été mis à jour.")
+        print("Succes update name company.")
 
     @staticmethod
     def update_company_name_failed() -> None:
         """Method to display a failed message after tried
         to update a company.
         """
-        print("The company update failed.")
+        print("Failed update name company.")
 
     @staticmethod
     def delete_company_success() -> None:
         """Method to display a success message after
         the creation of a company.
         """
-        print("The company is now delete.")
+        print("Success delete company.")
 
     @staticmethod
     def delete_company_failed() -> None:
         """Method to display a failed message after
         tried to create a company.
         """
-        print("The company delete has failed.")
+        print("Failed delete company.")

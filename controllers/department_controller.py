@@ -1,5 +1,7 @@
 from dao.department_dao import DepartmentDao
 from views.department_view import DepartmentView
+from models.permissions import Permission
+from models.user import User
 
 
 class DepartmentController:
@@ -12,6 +14,7 @@ class DepartmentController:
         """
         self.dao = DepartmentDao()
         self.view = DepartmentView()
+        self.permission = Permission(User.load_user())
 
     def create_department(self, department_name: str) -> None:
         """Method to create new department
@@ -20,7 +23,8 @@ class DepartmentController:
             None
         """
         department = self.dao.create_department(department_name)
-
+        if not self.permission.isGestionDepartment():
+            return self.view.not_permission()
         if department:
             return self.view.create_department_success()
         else:
@@ -58,7 +62,8 @@ class DepartmentController:
         Returns:
             None
         """
-
+        if not self.permission.isGestionDepartment():
+            return self.view.not_permission()
         department = self.dao.update_name_department_by_id(id, new_name)
         if department:
             return self.view.update_success()
@@ -74,8 +79,9 @@ class DepartmentController:
         Returns:
             None
         """
+        if not self.permission.isGestionDepartment():
+            return self.view.not_permission()
         department = self.dao.delete_department_by_id(id_department)
-        print(department)
         if department:
             return self.view.delete_department_success()
         else:

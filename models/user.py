@@ -2,7 +2,7 @@ import json
 import jwt
 from datetime import datetime, timedelta
 
-from config.parameters import TOKEN_PATH, DELAY
+from config.parameters import TOKEN_PATH, DELAY, SECRET_KEY
 
 
 class User:
@@ -25,12 +25,11 @@ class User:
             bool: the token user
         """
         expiration_time = datetime.now() + timedelta(minutes=DELAY)
-
         payload = {
             "user_id": self.id,
             "rights": self.rights,
             "exp": expiration_time}
-        return jwt.encode(payload, algorithm="HS256", key="maclesecrete")
+        return jwt.encode(payload, algorithm="HS256", key=SECRET_KEY)
 
     def register_info(self):
         """Method to regist information user"""

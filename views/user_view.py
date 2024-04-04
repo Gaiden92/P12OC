@@ -8,14 +8,14 @@ class UserView:
     @staticmethod
     def token_expired() -> None:
         """Method to display message expired token"""
-        print("Token expiré. Merci de vous reconnecter.")
+        print("Token expired. You must to login again.")
 
     @staticmethod
     def token_invalid() -> None:
         """Method to display message invalid token"""
-        print("Token invalide. Merci de réessayer.")
+        print("The token is not valid token. Try again.")
 
     @staticmethod
     def token_succes() -> None:
         """Method to display message succes token"""
-        print("Token valide.")
+        print("The token is valid.")

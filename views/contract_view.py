@@ -67,68 +67,69 @@ class ContractView:
         """Method to display a success message after
         the update of a contract.
         """
-        print("Le contrat a bien été mis à jour.")
+        print("Success update contract.")
 
     @staticmethod
     def update_failed() -> None:
         """Method to display a failed message after tried
         to update a contract.
         """
-        print("Le contrat n'a pas pu être mis à jour.")
+        print("Failed update contract.")
 
     @staticmethod
     def create_contract_success() -> None:
         """Method to display a success message after the creation
         of a contract.
         """
-        print("Le contract a été crée avec succés.")
+        print("Success creation contract.")
 
     @staticmethod
     def create_contract_failed() -> None:
         """Method to display a failed message after tried
         to create a contract.
         """
-        print("Le contract n'a pas pu être crée.")
+        print("Failed creation contract.")
 
     @staticmethod
     def contract_not_exist() -> None:
         """Method to display a message that is none contract
         of this id in database.
         """
-        print("Le contrat n'existe pas.")
+        print("This contract doesn't exist.")
 
     @staticmethod
     def none_contracts() -> None:
         """Method to display a message that is none contracts
         actually in database.
         """
-        print("Aucuns contrat en base de donnée")
+        print("None contracts in database.")
 
     @staticmethod
     def delete_client_success() -> None:
         """Method to display a success message after
-        the creation of a contract.
+        delete a client of a contract.
         """
-        print("Le client a bien été supprimé.")
+        print("Success delete client contract.")
 
     @staticmethod
     def delete_client_failed() -> None:
         """Method to display a failed message after
-        tried to create a contract.
+        tried to delete  a client contract.
         """
-        print("Le client n'a pas pu être supprimé.")
+        print("Failed delete client contract.")
 
     @staticmethod
     def not_permission_contract() -> None:
         """Method to display a message that the user
         has not the permission to add or update a contract.
         """
-        print("Vous n'avez pas les droits nécessaire \
-              pour ajouter ou modifier un contrat.")
+        print("You don't have the permission to \
+              add or update a contrat.")
 
     @staticmethod
     def not_permission_commercial_contract() -> None:
         """Method to display a message that the user
         has not the permission to update the contract.
         """
-        print("Vous n'êtes pas le commercial du contrat.")
+        print("You can perform this action cause youre not \
+              the contract commercial.")

@@ -13,8 +13,8 @@ class ClientView:
         headers = ["Informations", "Valeurs"]
         print(tp.header(headers, [15, 30]))
         for client in clients:
-            print(tp.row(["Nom complet", client.name_client], [15, 30]))
-            print(tp.row(["Email", client.email], [15, 30]))
+            print(tp.row(["Full name", client.name_client], [15, 30]))
+            print(tp.row(["Mail", client.email], [15, 30]))
             print(tp.row(["Phone", client.phone], [15, 30]))
             print(tp.row(["Create date", str(client.creation_date)], [15, 30]))
             print(tp.row(["Update date", str(client.update_date)], [15, 30]))
@@ -33,8 +33,8 @@ class ClientView:
         """
         headers = ["Informations", "Valeurs"]
         print(tp.header(headers, [30, 30]))
-        print(tp.row(["Nom complet", client.name_client], 30))
-        print(tp.row(["Email", client.email], 30))
+        print(tp.row(["Full name", client.name_client], 30))
+        print(tp.row(["Mail", client.email], 30))
         print(tp.row(["Phone", client.phone], 30))
         print(tp.row(["Create date", str(client.creation_date)], 30))
         print(tp.row(["Update date", str(client.update_date)], 30))
@@ -49,60 +49,61 @@ class ClientView:
         """Method to display a success message after the creation
         of a client.
         """
-        print("Le client a été crée avec succés.")
+        print("Success creation client.")
 
     @staticmethod
     def create_client_failed() -> None:
         """Method to display a failed message after tried
         to create a client.
         """
-        print("Le client n'a pas pu être crée.")
+        print("Failed creation client.")
 
     @staticmethod
     def update_client_success() -> None:
         """Method to display a success message after
         the update of a client.
         """
-        print("Le client a bien été mis à jour.")
+        print("Success update client.")
 
     @staticmethod
     def update_client_failed() -> None:
         """Method to display a failed message after tried
         to update a client.
         """
-        print("Le client n'a pas pu être mis à jour.")
+        print("Failed update client.")
 
     @staticmethod
     def client_not_exist() -> None:
         """Method to display a message that is none client
         of this id in database.
         """
-        print("Le client n'existe pas.")
+        print("This client doesn't exist.")
 
     @staticmethod
     def none_clients() -> None:
         """Method to display a message that is none clients
         actually in database.
         """
-        print("Aucuns client en base de donnée.")
+        print("None clients in database")
 
     @staticmethod
     def not_permission_client() -> None:
         """Method to display a message that the user
         has not the permission to add or update a client.
         """
-        print("Vous n'avez pas les droits nécessaires\
-                pour ajouter ou modifier un client")
+        print("You don't have the permission to perform this\
+              action.")
 
     @staticmethod
     def not_permission_commercial_client():
         """Method to display a message that the user
         has not the permission to add or update a client.
         """
-        print("Vous n'êtes pas le commercial du client")
+        print("You don't have the permission to perform this\
+              action. You're not the client commercial.")
 
     @staticmethod
     def email_invalid():
         """Method to check if an email is valid
         """
-        print("L'email est invalide.")
+        print("Invalid email")

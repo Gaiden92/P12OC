@@ -10,7 +10,7 @@ class EventView:
         Arguments:
             events -- list: events
         """
-        headers = ["Informations", "Valeurs"]
+        headers = ["Informations", "Values"]
         print(tp.header(headers, [12, 80]))
         for event in events:
             print(tp.row(["Event id", str(event.id)], [12, 80]))
@@ -31,7 +31,7 @@ class EventView:
                     str(event.support.name_collaborator)],
                     [12, 80]))
             else:
-                print(tp.row(["Support id", "pas de support"], [12, 80]))
+                print(tp.row(["Support id", "none support yet"], [12, 80]))
             print("-"*97)
         print(tp.bottom(2, [12, 80]))
 
@@ -58,7 +58,7 @@ class EventView:
                     str(event.support.name_collaborator)
                     ], [12, 80]))
         else:
-            print(tp.row(["Support id", "pas de support"], [12, 80]))
+            print(tp.row(["Support id", "not support yet"], [12, 80]))
         print(tp.bottom(2, [12, 80]))
 
     @staticmethod
@@ -66,53 +66,53 @@ class EventView:
         """Method to display a success message after
         the creation of an event.
         """
-        print("L'evenement a été crée avec succés.")
+        print("Success event creation.")
 
     @staticmethod
     def create_event_failed() -> None:
         """Method to display a failed message after tried
         to create an event.
         """
-        print("L'evenement n'a pas pu être crée.")
+        print("Failed event creation.")
 
     @staticmethod
     def event_not_exist() -> None:
         """Method to display a message that is none event
         of this id in database.
         """
-        print("L'évenement n'existe pas.")
+        print("This event didn't exist.")
 
     @staticmethod
     def none_events() -> None:
         """Method to display a message that is none
         events actually in database.
         """
-        print("Aucuns évenements en base de donnée")
+        print("None event in database")
 
     @staticmethod
     def update_event_success() -> None:
         """Method to display a success message after
         the update of an event.
         """
-        print("L'evenement a bien été mis à jour.")
+        print("Success event update.")
 
     @staticmethod
     def update_event_failed() -> None:
         """Method to display a failed message after
         tried to update an event.
         """
-        print("L'evenement n'a pas pu être mis à jour.")
+        print("Failed event update.")
 
     @staticmethod
     def not_permission_commercial_contract() -> None:
         """Method to display a message that the user
         has not the permission to update the contract.
         """
-        print("Vous n'êtes pas le commercial du contrat.")
+        print("Your not the contract commercial.")
 
     @staticmethod
     def not_permission_support_of_event() -> None:
         """Method to display a message that the user
         has not the permission to update the contract.
         """
-        print("Vous n'êtes pas le support du contrat.")
+        print("Your not the contract support.")

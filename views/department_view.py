@@ -39,6 +39,13 @@ class DepartmentView:
 
         print(bottom)
 
+    @staticmethod
+    def not_permission() -> None:
+        """Method to display a failed message if the
+        collaborator are not the permission.
+        """
+        print("You are not the permission to perform this action.")
+
     def display_department(self, department: object) -> None:
         """Method to display one department.
 
@@ -106,25 +113,25 @@ class DepartmentView:
         """Method to display a success message after the creation
         of a department.
         """
-        print("Le department a été crée avec succès")
+        print("Success creation department.")
 
     @staticmethod
     def create_department_failed() -> None:
         """Method to display a failed message after tried
         to create a department.
         """
-        print("La création du départment a échoué")
+        print("Failed creation department.")
 
     @staticmethod
     def delete_department_success() -> None:
         """Method to display a success message after
         the creation of a department.
         """
-        print("Le départment a bien été supprimé.")
+        print("Success delete department.")
 
     @staticmethod
     def delete_department_failed() -> None:
         """Method to display a failed message after
         tried to create a department.
         """
-        print("Le départment n'a pas pu être supprimé.")
+        print("Failed delete department.")
