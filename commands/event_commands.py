@@ -69,7 +69,7 @@ def add(
     start_date: object,
     end_date: object,
 ) -> None:
-    """Function command to add a new event
+    """Add a new event
 
     Arguments:
         token -- str: user token
@@ -99,7 +99,7 @@ def add(
               type=str,
               callback=controller_user.verify_token)
 def select_all(token: str) -> None:
-    """Function command to select all events
+    """Select all events
 
     Arguments:
         token -- str: token user
@@ -113,12 +113,40 @@ def select_all(token: str) -> None:
               help="token user",
               type=str,
               callback=controller_user.verify_token)
+def filter_by_not_support(token: str) -> None:
+    """Filter event with no
+    support.
+
+    """
+    controller_event.filter_by_not_support()
+
+
+@event_commands.command()
+@click.option("--token",
+              prompt="Enter your token",
+              help="token user",
+              type=str,
+              callback=controller_user.verify_token)
+def filter_by_if_support(token: str) -> None:
+    """Filter all event with
+    support.
+
+    """
+    controller_event.filter_by_if_support()
+
+
+@event_commands.command()
+@click.option("--token",
+              prompt="Enter your token",
+              help="token user",
+              type=str,
+              callback=controller_user.verify_token)
 @click.option("--id",
               prompt="Enter the event ID",
               help="event id",
               type=int)
 def select_by_id(token: str, id: int) -> None:
-    """Function command to select an event by his id
+    """Select an event by his id.
 
     Arguments:
         token -- str: token user
@@ -144,7 +172,7 @@ def select_by_id(token: str, id: int) -> None:
     type=str
 )
 def update_name_by_id(token: str, id: int, new_name: str) -> None:
-    """Function command to update the name event
+    """Update the name event.
 
     Arguments:
         token -- str: token user
@@ -172,7 +200,7 @@ def update_contract_by_id(token: str,
                           id: int,
                           contract_id: int
                           ) -> None:
-    """Function command to update the contract id event
+    """Update the contract id event.
 
     Arguments:
         token -- str: token user
@@ -199,7 +227,7 @@ def update_contract_by_id(token: str,
 def update_support_by_id(token: str,
                          id: int,
                          support_id: int) -> None:
-    """Function command to update the support id event
+    """Update the support id event.
 
     Arguments:
         token -- str: token user
@@ -223,7 +251,7 @@ def update_support_by_id(token: str,
     type=str
 )
 def update_location_by_id(token: str, id: int, new_location: str) -> None:
-    """Function command to update the location event
+    """Update the location event.
 
     Arguments:
         token -- str: token user
@@ -252,7 +280,7 @@ def update_location_by_id(token: str, id: int, new_location: str) -> None:
 def update_participants_by_id(token: str,
                               id: int,
                               new_participants: int) -> None:
-    """Function command to update the participants event
+    """Update the participants event.
 
     Arguments:
         token -- str: token user
@@ -274,7 +302,7 @@ def update_participants_by_id(token: str,
               help="new notes",
               type=str)
 def update_notes_by_id(token: str, id: int, new_notes: str):
-    """Function command to update the notes event
+    """Update the notes event.
 
     Arguments:
         token -- str: token user
@@ -298,7 +326,7 @@ def update_notes_by_id(token: str, id: int, new_notes: str):
     type=click.DateTime(formats=["%Y-%m-%d %H:%M"]),
 )
 def update_start_date_by_id(token: str, id: int, new_start_date: str) -> None:
-    """Function command to update the start date event
+    """Update the start date event.
 
     Arguments:
         token -- str: token user
@@ -322,7 +350,7 @@ def update_start_date_by_id(token: str, id: int, new_start_date: str) -> None:
     type=click.DateTime(formats=["%Y-%m-%d %H:%M"]),
 )
 def update_end_date_by_id(token: str, id: int, new_end_date: str) -> None:
-    """Function command to update the end date event
+    """Update the end date event.
 
     Arguments:
         token -- str: token user

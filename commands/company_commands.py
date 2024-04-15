@@ -29,7 +29,7 @@ def company_commands():
     type=str
 )
 def add(token: str, name: str) -> None:
-    """Function command to add a new company
+    """Add a new company in database.
 
     Arguments:
         token -- str: token user
@@ -45,7 +45,7 @@ def add(token: str, name: str) -> None:
               type=str,
               callback=controller_user.verify_token)
 def select_all(token: str) -> None:
-    """Function to select all companies
+    """Select all companies to display them.
 
     Arguments:
         token -- str: token user
@@ -64,7 +64,7 @@ def select_all(token: str) -> None:
               help="the company id",
               type=int)
 def select_by_id(token: str, id: int) -> None:
-    """Function to select a company by his id
+    """Select a company by his id.
 
     Arguments:
         token -- str: token user
@@ -90,7 +90,7 @@ def select_by_id(token: str, id: int) -> None:
     type=str,
 )
 def update_name_by_id(token: str, id: int, new_name: str) -> None:
-    """Function command to update a name company
+    """Update a name company.
 
     Arguments:
         token -- str: token user
@@ -111,7 +111,7 @@ def update_name_by_id(token: str, id: int, new_name: str) -> None:
               help="ID of the company",
               type=int)
 def delete_by_id(token: str, id: int) -> None:
-    """Function command to delete a company by his id
+    """Delete a company by his id.
 
     Arguments:
         token -- str: token user

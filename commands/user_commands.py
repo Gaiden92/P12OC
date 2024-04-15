@@ -28,7 +28,7 @@ def user_commands():
     type=str,
 )
 def login(id: int, password: str) -> None:
-    """Function command to login
+    """Command to login
 
     Arguments:
         id -- int: id of the collaborator

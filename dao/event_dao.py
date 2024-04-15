@@ -27,6 +27,30 @@ class EventDao:
         else:
             None
 
+    def filter_by_not_support(self) -> None:
+        """Method to get all events with no support.
+
+        Returns:
+            None
+        """
+        events = self.query.filter(Event.support_id is None).all()
+        if events:
+            return events
+        else:
+            return None
+
+    def filter_by_if_support(self) -> None:
+        """Method to get all events with support.
+
+        Returns:
+            None
+        """
+        events = self.query.filter(Event.support_id is not None).all()
+        if events:
+            return events
+        else:
+            return None
+
     def select_event_by_id(self, event_id: int) -> object:
         """Method to get event by id
 

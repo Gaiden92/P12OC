@@ -42,7 +42,7 @@ def contract_commands():
 def add(
     token: str, client_id: int, total_amount: float, remaining_amount: float
 ) -> None:
-    """Function command to add a new contract
+    """Add a new contract in database
 
     Arguments:
         token -- str: token user
@@ -63,7 +63,7 @@ def add(
     type=str,
     callback=controller_user.verify_token)
 def select_all(token: str) -> None:
-    """Function command to select all contracts
+    """Select all contracts to display.
 
     Arguments:
         token -- str: token user
@@ -83,7 +83,7 @@ def select_all(token: str) -> None:
               help="contract id",
               type=int)
 def select_by_id(token: str, id: int) -> None:
-    """Function command to select a contract by his id
+    """Select a contract by his id to display.
 
     Arguments:
         token -- str: token user
@@ -100,7 +100,7 @@ def select_by_id(token: str, id: int) -> None:
     type=str,
     callback=controller_user.verify_token)
 def filter_by_remaining_amount_desc(token: str) -> None:
-    """Function command to filter contract by remaining amount
+    """Filter all contracts by remaining amount desc
 
     Arguments:
         token -- str: token user
@@ -116,7 +116,7 @@ def filter_by_remaining_amount_desc(token: str) -> None:
     type=str,
     callback=controller_user.verify_token)
 def filter_by_total_amount_desc(token: str) -> None:
-    """Function command to filter contract by total amount
+    """Filter all contracts by total amount desc
 
     Arguments:
         token -- str: token user
@@ -130,13 +130,20 @@ def filter_by_total_amount_desc(token: str) -> None:
               help="token user",
               type=str,
               callback=controller_user.verify_token)
-def filter_by_status(token: str) -> None:
-    """Function command to filter contract by status
+@click.option(
+    "--status",
+    prompt="Enter the status",
+    help="status",
+    type=click.Choice(["open", "close"], case_sensitive=False),
+)
+def filter_by_status(token: str, status: str) -> None:
+    """Filter contract by status
 
     Arguments:
         token -- str: token user
+        status -- str: status of contracts
     """
-    controller_contract.filter_contracts_by_status()
+    controller_contract.filter_contracts_by_status(status)
 
 
 @contract_commands.command()
@@ -158,7 +165,7 @@ def filter_by_status(token: str) -> None:
 def update_remaining_amount_by_id(token: str,
                                   id: int,
                                   new_remaining_amount: float) -> None:
-    """Function command to update a contract remaining amount
+    """Update a contract remaining amount
 
     Arguments:
         token -- str: user token
@@ -187,7 +194,7 @@ def update_remaining_amount_by_id(token: str,
 def update_total_amount_by_id(token: str,
                               id: int,
                               new_total_amount: float) -> None:
-    """Function command to update a contract total amount
+    """Update a contract total amount
 
     Arguments:
         token -- str: user token
@@ -214,7 +221,7 @@ def update_total_amount_by_id(token: str,
     type=click.Choice(["open", "close"], case_sensitive=False),
 )
 def update_status_by_id(token: str, id: int, status: str) -> None:
-    """Function command to update a contract status
+    """Update a contract status
 
     Arguments:
         token -- str: user token
@@ -242,7 +249,7 @@ def update_status_by_id(token: str, id: int, status: str) -> None:
     callback=controller_contract.is_client_valid
 )
 def update_client_by_id(token: str, id: int, id_client: int) -> None:
-    """Function command to update a contract client
+    """Update a contract client
 
     Arguments:
         token -- str: user token

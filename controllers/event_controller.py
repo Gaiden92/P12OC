@@ -94,6 +94,36 @@ class EventController:
         else:
             return self.view.none_events
 
+    def filter_by_not_support(self) -> None:
+        """Method to control the filter all events
+        if not support.
+
+        Returns:
+            None
+        """
+        if not self.permission.isGestionDepartment():
+            return self.view.not_permission()
+        events = self.dao.filter_by_not_support()
+        if events:
+            return self.view.display_all_events(events)
+        else:
+            return self.view.none_events()
+
+    def filter_by_if_support(self) -> None:
+        """Method to control the filter all events
+        with support.
+
+        Returns:
+            None
+        """
+        if not self.permission.isSupportDepartment():
+            return self.view.not_permission()
+        events = self.dao.filter_by_if_support()
+        if events:
+            return self.view.display_all_events(events)
+        else:
+            return self.view.none_events()
+
     def update_name_event_by_id(self, id: int, new_name: str) -> None:
         """Method to update the event name.
 

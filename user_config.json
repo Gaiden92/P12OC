@@ -1,0 +1,9 @@
+{
+    "user": "postgres",
+    "password": "superadmin",
+    "host": "localhost",
+    "port": "5433",
+    "name": "postgres",
+    "secret_key": "maclesecrete",
+    "dsn": "https://0564a7dfdb9cb640b6049d9369aa2cfd@o4507008616759296.ingest.us.sentry.io/4507008619839488"
+}

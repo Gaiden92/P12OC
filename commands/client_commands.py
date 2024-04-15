@@ -54,7 +54,7 @@ def add(token: str,
         contact: str,
         email: str,
         company_id: int) -> None:
-    """Function command to add a new client
+    """Add a new client in database.
 
     Arguments:
         token -- str: token user
@@ -73,7 +73,7 @@ def add(token: str,
               type=str,
               callback=controller_user.verify_token)
 def select_all(token: str) -> None:
-    """Function command to select all client
+    """Select all client to display them.
 
     Arguments:
         token -- str: token user
@@ -92,7 +92,7 @@ def select_all(token: str) -> None:
               help="the client id",
               type=int)
 def select_by_id(token: str, id: int) -> None:
-    """Function command to select by id a client
+    """Select by id a client to display it.
 
     Arguments:
         token -- str: token user
@@ -118,7 +118,7 @@ def select_by_id(token: str, id: int) -> None:
     type=str,
 )
 def update_name_by_id(token: str, id: int, new_name: str) -> None:
-    """Function command to update a name client by id
+    """Update a name client by id.
 
     Arguments:
         token -- str: token user
@@ -146,7 +146,7 @@ def update_name_by_id(token: str, id: int, new_name: str) -> None:
     callback=controller_client.is_phone_valid
 )
 def update_phone_by_id(token: str, id: int, new_phone: str) -> None:
-    """Function command to update a phone client by id
+    """Update a phone client by id.
 
     Arguments:
         token -- str: token user
@@ -174,6 +174,13 @@ def update_phone_by_id(token: str, id: int, new_phone: str) -> None:
     callback=controller_client.is_email_valid
 )
 def update_email_by_id(token: str, id: int, new_email: str) -> None:
+    """Update email client by his id.
+
+    Arguments:
+        token -- str: token user
+        id -- int: id client
+        new_email -- str: new email
+    """
     controller_client.update_email_client_by_id(id, new_email)
 
 
@@ -195,7 +202,7 @@ def update_email_by_id(token: str, id: int, new_email: str) -> None:
     callback=controller_client.is_commercial_valid
 )
 def update_commercial_by_id(token: str, id: int, id_commercial: int):
-    """Function command to update a commercial client by id
+    """Update a commercial client by id.
 
     Arguments:
         token -- str: token user
@@ -216,7 +223,7 @@ def update_commercial_by_id(token: str, id: int, id_commercial: int):
               help="ID of the client",
               type=int)
 def delete_by_id(token: str, id: int) -> None:
-    """Function command to delete a client by id
+    """Delete a client by id.
 
     Arguments:
         token -- str: token user

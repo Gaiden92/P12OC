@@ -104,6 +104,13 @@ class EventView:
         print("Failed event update.")
 
     @staticmethod
+    def not_permission() -> None:
+        """Method to display a message that the user
+        has not the permission.
+        """
+        print("You are not the permission to perfom this action.")
+
+    @staticmethod
     def not_permission_commercial_contract() -> None:
         """Method to display a message that the user
         has not the permission to update the contract.

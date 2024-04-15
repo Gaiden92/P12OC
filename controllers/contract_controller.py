@@ -94,14 +94,20 @@ class ContractController:
         else:
             return self.view.none_contracts()
 
-    def filter_contracts_by_status(self) -> None:
+    def filter_contracts_by_status(self, status: str) -> None:
         """Method to control the contracts by
         status filter
 
+        Arguments
+            status -- str: status of contracts
         Returns:
             None
         """
-        contracts = self.dao.filter_contracts_by_status()
+        if status == "open":
+            bool_status = True
+        else:
+            bool_status = False
+        contracts = self.dao.filter_contracts_by_status(bool_status)
         if contracts:
             return self.view.display_all_contracts(contracts)
         else:

@@ -54,7 +54,7 @@ def add(token: str,
         contact: str,
         password: str,
         department_id: id) -> None:
-    """Function command to add a new collaborator
+    """Add a new collaborator in database.
 
     Arguments:
         token -- str: token collaborator
@@ -75,7 +75,7 @@ def add(token: str,
               type=str,
               callback=controller_user.verify_token)
 def select_all(token: str) -> None:
-    """Function command to select all collaborators
+    """Select all collaborators to display them.
 
     Arguments:
         token -- str: token user
@@ -96,7 +96,7 @@ def select_all(token: str) -> None:
     type=int
 )
 def select_by_id(token: str, id: int) -> None:
-    """Function command to select a collaborator by his id
+    """Select a collaborator by his id to display.
 
     Arguments:
         token -- str: token user
@@ -123,7 +123,7 @@ def select_by_id(token: str, id: int) -> None:
     type=str,
 )
 def update_name_by_id(token: str, id: int, new_name: str) -> None:
-    """Function command to update a name collaborator
+    """Update a name collaborator.
 
     Arguments:
         token -- str: token user
@@ -153,7 +153,7 @@ def update_name_by_id(token: str, id: int, new_name: str) -> None:
     callback=controller_collaborator.is_phone_valid
 )
 def update_contact_by_id(token: str, id: int, new_contact: str) -> None:
-    """Function command to update a contact collaborator
+    """Update a contact collaborator.
 
     Arguments:
         token -- str: token user
@@ -176,7 +176,7 @@ def update_contact_by_id(token: str, id: int, new_contact: str) -> None:
     type=int
 )
 def delete_by_id(token: str, id: int) -> None:
-    """Function command to delete a collaborator
+    """delete a collaborator.
 
     Arguments:
         token -- str: token user
