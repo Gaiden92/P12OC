@@ -51,6 +51,20 @@ class EventDao:
         else:
             return None
 
+    def filter_by_is_support(self, support_id: int) -> None:
+        """Method to get all the events of the support id.
+
+        Arguments:
+            support_id -- int: id of the support
+        Returns:
+            None
+        """
+        events = self.query.filter(Event.support_id == support_id).all()
+        if events:
+            return events
+        else:
+            return None
+
     def select_event_by_id(self, event_id: int) -> object:
         """Method to get event by id
 

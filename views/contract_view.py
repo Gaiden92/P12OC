@@ -13,7 +13,7 @@ class ContractView:
         headers = ["Informations", "Valeurs"]
         print(tp.header(headers, [30, 30]))
         for contract in contracts:
-            print(tp.row(["Name client",
+            print(tp.row(["Name commercial",
                           contract.client.commercial.name_collaborator
                           ], [30, 30]))
             print(tp.row(["Name client",
@@ -42,7 +42,7 @@ class ContractView:
         """
         headers = ["Informations", "Valeurs"]
         print(tp.header(headers, [30, 30]))
-        print(tp.row(["Name client",
+        print(tp.row(["Name commercial",
                       contract.client.commercial.name_collaborator
                       ], [30, 30]))
         print(tp.row(["Name client",

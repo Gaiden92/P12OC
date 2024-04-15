@@ -123,6 +123,21 @@ class EventController:
             return self.view.display_all_events(events)
         else:
             return self.view.none_events()
+        
+    def filter_by_is_support(self) -> None:
+        """Method to control the filter all events
+        by support id.
+
+        Returns:
+            None
+        """
+        if not self.permission.isSupportDepartment():
+            return self.view.not_permission()
+        events = self.dao.filter_by_is_support(self.user.id)
+        if events:
+            return self.view.display_all_events(events)
+        else:
+            return self.view.none_events()
 
     def update_name_event_by_id(self, id: int, new_name: str) -> None:
         """Method to update the event name.

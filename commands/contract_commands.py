@@ -99,7 +99,7 @@ def select_by_id(token: str, id: int) -> None:
     help="token user",
     type=str,
     callback=controller_user.verify_token)
-def filter_by_remaining_amount_desc(token: str) -> None:
+def filter_by_remaining_amount(token: str) -> None:
     """Filter all contracts by remaining amount desc
 
     Arguments:
@@ -115,7 +115,7 @@ def filter_by_remaining_amount_desc(token: str) -> None:
     help="token user",
     type=str,
     callback=controller_user.verify_token)
-def filter_by_total_amount_desc(token: str) -> None:
+def filter_by_total_amount(token: str) -> None:
     """Filter all contracts by total amount desc
 
     Arguments:

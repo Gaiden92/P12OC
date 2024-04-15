@@ -134,6 +134,19 @@ def filter_by_if_support(token: str) -> None:
     """
     controller_event.filter_by_if_support()
 
+@event_commands.command()
+@click.option("--token",
+              prompt="Enter your token",
+              help="token user",
+              type=str,
+              callback=controller_user.verify_token)
+def filter_by_is_support(token: str) -> None:
+    """Filter all event of the
+    support id.
+
+    """
+    controller_event.filter_by_is_support()
+
 
 @event_commands.command()
 @click.option("--token",
